@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "city": "Barcelona",
+    "country": "Spain",
+    "holidayDetails": {
+      "priceForAdult": 100,
+      "priceForChild": 50,
+      "description": "Barcelona is a city in Spain. It is the capital and largest city of the autonomous community of Catalonia, as well as the second most populous municipality of Spain. With a population of 1.6 million within city limits, its urban area extends to numerous neighbouring municipalities within the Province of Barcelona and is home to around 4.8 million people, making it the sixth most populous urban area in the European Union."
+    }
+  }
+,
+  {
+    "id": 2,
+    "city": "London",
+    "country": "United Kingdom",
+    "holidayDetails": {
+      "priceForAdult": 120,
+      "priceForChild": 60,
+      "description": "London is the capital and largest city of both England and the United Kingdom, as well as the largest city within the European Union. Standing on the River Thames in the south-east of England, at the head of its 50-mile (80 km) estuary leading to the North Sea, London has been a major settlement for two millennia."
+    }
+  },
+  {
+    "id": 3,
+    "city": "Lisbon",
+    "country": "Portugal",
+    "holidayDetails": {
+      "priceForAdult": 90,
+      "priceForChild": 40,
+      "description": "Lisbon is the capital and the largest city of Portugal. With an estimated population of 505,526 within its administrative limits in an area of 100.05 km2,  Lisbon's urban area extends beyond the city's administrative limits with a population of around 2.8 million people, being the 11th-most populous urban area in the European Union."
+    }
+  },
+  {
+    "id": 4,
+    "city": "Rome",
+    "country": "Italy",
+    "holidayDetails": {
+      "priceForAdult": 95,
+      "priceForChild": 45,
+      "description": "Rome  is the capital city and a special comune of Italy (named Comune di Roma Capitale). Rome also serves as the capital of the Lazio region. With 2,872,800 residents in 1,285 km2 (496.1 sq mi), it is also the country's most populated comune. It is the fourth most populous city in the European Union by population within city limits."
+    }
+  },
+  {
+    "id": 5,
+    "city": "Athens",
+    "country": "Greece",
+    "holidayDetails": {
+      "priceForAdult": 75,
+      "priceForChild": 35,
+      "description": "Athens is the capital and largest city of Greece. Athens dominates the Attica region and is one of the world's oldest cities, with its recorded history spanning over 3,400 years and its earliest human presence starting somewhere between the 11th and 7th millennium BC."
+    }
+  }
+]
