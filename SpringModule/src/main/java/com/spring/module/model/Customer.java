@@ -20,6 +20,18 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int id,String name, String lastname, String email) {
+        this.id=id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public Customer(String name, String lastname, String email) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+    }
 
     public Customer(String name, String lastname, String email, String phone, Address address) {
         this.name = name;

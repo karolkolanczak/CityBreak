@@ -1,6 +1,8 @@
 package com.spring.module.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -13,11 +15,37 @@ public class Holiday {
     private int id;
     private String city;
     private String country;
-    @OneToOne(cascade = CascadeType.ALL)
+//    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="holiday_details_id")
+    // below 1st part of solution for "JSON infinite recursion" occuring while requesting "api/holidays" through Rest
+    // second part in "HolidaysDetails"
+    @JsonManagedReference
     private HolidayDetails holidayDetails;
 
+    //    @Lob  (not working on production with postgresql, essential for mysql)
+    @Lob
+    private Byte[] image;
+
+    private String imagePath;
+
     public Holiday() {
+    }
+
+    public Byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(Byte[] image) {
+        this.image = image;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public int getId() {

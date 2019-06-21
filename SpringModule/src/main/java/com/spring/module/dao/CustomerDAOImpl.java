@@ -33,7 +33,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        System.out.println(" --- In matehod 'SAVE'");
         getSession().saveOrUpdate(customer);
     }
 
@@ -45,7 +44,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void deleteCustomer(int customerId) {
-        System.out.println(" ---- Customer will be deleted with ID: "+customerId);
         Query query =getSession().createNativeQuery("delete from Customer where id=:customId",Customer.class);
         query.setParameter("customId", customerId);
         query.executeUpdate();

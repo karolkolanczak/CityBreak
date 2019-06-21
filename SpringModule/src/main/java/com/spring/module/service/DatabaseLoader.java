@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,10 +36,13 @@ public class DatabaseLoader implements CommandLineRunner {
 
             listOfHolidays = Arrays.asList(arrayOfHolidays);
 
-
             for(Holiday value: listOfHolidays){
+
                 // below in order to create new id
                 value.setId(0);
+                if(value.getImagePath()!=null){
+                    value.setImage(convertsImage(value.getImagePath()));
+                }
                 holidayService.saveHoliday(value);
             }
 
@@ -47,4 +51,29 @@ public class DatabaseLoader implements CommandLineRunner {
             System.out.println("------------------ " + e);
         }
     }
+
+        Byte[]  convertsImage(String imagePath){
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource(imagePath).getFile());
+            Byte[] image=imageReader(file);
+            return image;
+        }
+
+        public Byte[] imageReader(File file){
+            byte[] fileContent = new byte[0];
+            Byte[] byteObjects=new Byte[0];
+            try {
+                fileContent = Files.readAllBytes(file.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            byteObjects=primitiveBytesArrayToObjectBytesArrayConverter(fileContent);
+            return byteObjects;
+        }
+
+        public Byte[] primitiveBytesArrayToObjectBytesArrayConverter(byte[] primitiveBytes){
+            Byte[] byteObjects = new Byte[primitiveBytes.length];
+            Arrays.setAll(byteObjects, n -> primitiveBytes[n]);
+            return byteObjects;
+        }
 }

@@ -1,5 +1,6 @@
 package com.spring.module.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -13,7 +14,10 @@ public class HolidayDetails {
     private String description;
     private double priceForAdult;
     private double priceForChild;
-    @OneToOne(mappedBy = "holidayDetails" ,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "holidayDetails" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // below 2nd part of solution for "JSON infinite recursion" occuring while requesting "api/holidays" through Rest
+    // first part in "Holidays"
+    @JsonBackReference
     private Holiday holiday;
 
     public HolidayDetails() {

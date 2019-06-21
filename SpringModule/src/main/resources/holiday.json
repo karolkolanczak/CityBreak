@@ -3,6 +3,7 @@
     "id": 1,
     "city": "Barcelona",
     "country": "Spain",
+    "imagePath": "images/barcelona.jpg",
     "holidayDetails": {
       "priceForAdult": 100,
       "priceForChild": 50,
@@ -14,6 +15,7 @@
     "id": 2,
     "city": "London",
     "country": "United Kingdom",
+    "imagePath": "images/london.jpg",
     "holidayDetails": {
       "priceForAdult": 120,
       "priceForChild": 60,
@@ -24,6 +26,7 @@
     "id": 3,
     "city": "Lisbon",
     "country": "Portugal",
+    "imagePath": "images/lisbon.jpg",
     "holidayDetails": {
       "priceForAdult": 90,
       "priceForChild": 40,
@@ -34,6 +37,7 @@
     "id": 4,
     "city": "Rome",
     "country": "Italy",
+    "imagePath": "images/rome.jpg",
     "holidayDetails": {
       "priceForAdult": 95,
       "priceForChild": 45,
@@ -44,10 +48,44 @@
     "id": 5,
     "city": "Athens",
     "country": "Greece",
+    "imagePath": "images/athens.jpg",
     "holidayDetails": {
       "priceForAdult": 75,
       "priceForChild": 35,
       "description": "Athens is the capital and largest city of Greece. Athens dominates the Attica region and is one of the world's oldest cities, with its recorded history spanning over 3,400 years and its earliest human presence starting somewhere between the 11th and 7th millennium BC."
+    }
+  },
+  {
+    "id": 6,
+    "city": "Valencia",
+    "country": "Spain",
+    "imagePath": "images/valencia.jpg",
+    "holidayDetails": {
+      "priceForAdult": 85,
+      "priceForChild": 40,
+      "description": "Valencia on the east coast of Spain, is the capital of the autonomous community of Valencia and the third-largest city in Spain after Madrid and Barcelona, with around 800,000 inhabitants in the administrative centre. Its urban area extends beyond the administrative city limits with a population of around 1.6 million people"
+    }
+  },
+  {
+    "id": 7,
+    "city": "Madrid",
+    "country": "Spain",
+    "imagePath": "images/madrid.jpg",
+    "holidayDetails": {
+      "priceForAdult": 120,
+      "priceForChild": 70,
+      "description": "Madrid is the capital of Spain and the largest municipality in both the Community of Madrid and Spain as a whole. The city has almost 3.3 million inhabitants and a metropolitan area population of approximately 6.5 million."
+    }
+  },
+  {
+    "id": 8,
+    "city": "Toledo",
+    "country": "Spain",
+    "imagePath": "images/toledo.jpg",
+    "holidayDetails": {
+      "priceForAdult": 70,
+      "priceForChild": 35,
+      "description": "Toledo is a city and municipality located in central Spain; it is the capital of the province of Toledo and the autonomous community of Castile–La Mancha."
     }
   }
 ]

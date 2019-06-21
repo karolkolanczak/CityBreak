@@ -39,6 +39,7 @@ public class CustomerRestController {
 
     @PostMapping("/customers")
     public Customer addCustomer(@RequestBody Customer customer){
+        // below in order to create new id
         customer.setId(0);
         customerService.saveCustomer(customer);
         return customer;
