@@ -1,9 +1,69 @@
-<p>
-  holiday-details:
-</p>
-<p>Country: {{holiday.country}}</p>
-<p>City: {{holiday.city}}</p>
-<p>description: {{holiday.description}}</p>
-<p>priceForAdult: {{holiday.priceForAdult}}</p>
-<p>priceForChild: {{holiday.priceForChild}}</p>
+<h2>Holiday details:</h2>
+<br />
 
+
+<div class="row">
+
+  <div class="col-md-6" style='padding-right: 0px; padding-left: 0px;'>
+    <table class="table table-striped ">
+      <tr class="d-flex">
+        <th class="col-2">Country</th>
+        <th class="col-2">City</th>
+        <th class="col-4">Price For Adult</th>
+        <th class="col-4">Price for Child</th>
+      </tr>
+      <tr class="d-flex">
+        <td class="col-2">{{holiday.country}}</td>
+        <td class="col-2">{{holiday.city}}</td>
+        <td class="col-4">{{holiday.priceForAdult}}</td>
+        <td class="col-4">{{holiday.priceForChild}}</td>
+      </tr>
+    </table>
+    <h1>&nbsp;</h1><h1>&nbsp;</h1>
+    <table class="table table-striped">
+      <tr>
+        <th>Description</th>
+
+      </tr>
+      <tr>
+        <td>{{holiday.description}}</td>
+
+      </tr>
+    </table>
+    <h1>&nbsp;</h1><h1>&nbsp;</h1>
+    <div>
+      <form>
+        <div class="form-group">
+          <div class="row col-sm-4 control-label">
+            <button type="button" class="btn btn-primary" (click)="redirectToEditProduct()">Edit Product</button>
+          </div>
+          <div class="row col-sm-4 control-label">
+            <button type="button" class="btn btn-danger" (click)="openModal(template)">Delete Product</button>
+            <br><br>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Do you want to confirm?</p>
+                <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-6" style='padding-right: 0px; padding-left: 0px;'>
+    <table class="table table-striped">
+      <tr>
+        <th style="text-align:center">Image</th>
+      </tr>
+      <tr>
+        <td><img src = "{{product.image}}" width="400" height="400" class="center-block"/>
+          <h5 style="text-align:center">Free pictures from: burst.shopify.com</h5>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+</div>

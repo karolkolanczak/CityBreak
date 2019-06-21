@@ -2,10 +2,10 @@ export class Holiday{
   city: string;
   country: string;
   description: string;
-  priceForAdult: number;
-  priceForChild: number;
+  priceForAdult ;
+  priceForChild ;
 
-  constructor(city: string, country: string, description: string, priceForAdult: number, priceForChild: number) {
+  constructor(city: string, country: string, description: string, priceForAdult, priceForChild) {
     this.city = city;
     this.country = country;
     this.description = description;
