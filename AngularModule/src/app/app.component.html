@@ -1,10 +1,22 @@
 <div class="container">
 
   <app-header></app-header>
- <app-holiday></app-holiday>
 
-  <!--<router-outlet></router-outlet>-->
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="/holidays">List of Countries</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/cities">List of Cities</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </li>
+  </ul>
 
-  <!--<app-footer></app-footer>-->
+  <router-outlet></router-outlet>
 
 </div>

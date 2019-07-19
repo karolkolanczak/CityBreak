@@ -18,8 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -62,7 +61,7 @@ public class HolidayRestContoller {
 }
 
 @GetMapping(value = "/image/{holidayId}",produces = MediaType.IMAGE_JPEG_VALUE)
-//public @ResponseBody
+
     public byte[] getImageByHolidayId(@PathVariable int holidayId) throws IOException {
 
         List<Holiday> listOfHolidays=holidayService.getHolidays();
@@ -77,6 +76,5 @@ public class HolidayRestContoller {
         }
         return bytes;
     }
-
 
 }

@@ -16,6 +16,8 @@ import {HolidayCitiesItemComponent} from './holiday/holiday-cities-list/holiday-
 import {HolidayCitiesTabItemComponent} from './holiday/holiday-cities-list/holiday-cities-tab-item/holiday-cities-tab-item.component';
 import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

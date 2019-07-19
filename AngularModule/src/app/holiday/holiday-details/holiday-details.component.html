@@ -2,7 +2,10 @@
 <br />
 
 
-<div class="row">
+<!--<div class="row" www="holiday.id">-->
+  <div class="row">
+
+
 
   <div class="col-md-6" style='padding-right: 0px; padding-left: 0px;'>
     <table class="table table-striped ">
@@ -13,6 +16,7 @@
         <th class="col-4">Price for Child</th>
       </tr>
       <tr class="d-flex">
+        <!--<td class="col-2">{{holiday.id}}</td>-->
         <td class="col-2">{{holiday.country}}</td>
         <td class="col-2">{{holiday.city}}</td>
         <td class="col-4">{{holiday.priceForAdult}}</td>
@@ -58,12 +62,37 @@
         <th style="text-align:center">Image</th>
       </tr>
       <tr>
-        <td><img src = "{{product.image}}" width="400" height="400" class="center-block"/>
+        <td><img [src]="holiday.imageToShow" *ngIf="!isImageLoading; else noImageFound" width="400" height="400" class="center-block"/>
           <h5 style="text-align:center">Free pictures from: burst.shopify.com</h5>
         </td>
       </tr>
     </table>
   </div>
 
+   <!--======================== |||||||||-->
+  <!--1  <div> <img [src]='holiday.imageToShow'> </div>-->
+    <!--=================================-->
+  <!--2  <div> <img src="{{holiday.imageToShow}}"> </div>-->
+  <!--ppppppppppppppppppppppppppppp-->
+  <!--3-->
+
+  <!--<div> <img src="{{imageToShow}}"> </div>-->
+  <!--4-->
+
+  <!--<div> <img [src]="imageToShow"/> </div>-->
+  <!--5-->
+
+  <!--<div> <img bind-src="imageToShow"/> </div>-->
+
+    <!--6-->
+    <!--<div> <img src="{{holiday.imageToShow}}"> </div>-->
 
 </div>
+
+<button type="button" (click)="getImageFromService(holiday.id)">Get Image</button>
+<!--<img [src]="imageToShow"-->
+     <!--alt="Place image title"-->
+     <!--*ngIf="!isImageLoading; else noImageFound">-->
+<!--<ng-template #noImageFound>-->
+  <!--<img src="fallbackImage.png" alt="Fallbackimage">-->
+<!--</ng-template>-->

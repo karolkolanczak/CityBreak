@@ -19,5 +19,8 @@ export class HolidayCitiesTabItemComponent implements OnInit {
   selectedCity(){
     console.log("Clicked - HolidayCitiesTabItemComponent " +this.holiday.country+" "+this.holiday.city+" "+this.holiday.priceForAdult);
     this.holidayService.citySelected.emit(this.holiday)
+    // this.getImageFromService();
    }
+
+
 }

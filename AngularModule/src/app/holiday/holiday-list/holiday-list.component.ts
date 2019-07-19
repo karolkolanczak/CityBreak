@@ -13,6 +13,7 @@ export class HolidayListComponent implements OnInit {
   listOfHolidays: Holiday[]=[];
 
 
+
   constructor(private holidayService: HolidayService) { }
 
   ngOnInit() {
@@ -21,15 +22,15 @@ export class HolidayListComponent implements OnInit {
       for(let value of data){
 
         let holidayTemp: Holiday=null;
-        holidayTemp.country=value.country;
+        holidayTemp.country="AMERYKA";
         holidayTemp.city=value.city;
         holidayTemp.description=value.holidayDetails.description;
-        holidayTemp.priceForAdult=value.holidayDetails.priceForAdult
-        holidayTemp.priceForChild=value.holidayDetails.priceForChild
+        holidayTemp.priceForAdult=value.holidayDetails.priceForAdult;
+        holidayTemp.priceForChild=value.holidayDetails.priceForChild;
+        // holidayTemp.image=this.getImageFromService();
         this.listOfHolidays.push(holidayTemp);
         console.log(holidayTemp.country+" "+ holidayTemp.city+" "+holidayTemp.priceForAdult+" "+holidayTemp.priceForChild)
       }
-
       // this.listOfHolidays = data;
     });
   }
@@ -37,6 +38,7 @@ export class HolidayListComponent implements OnInit {
   getListOfUniqueCountriesForHolidays(): string[]{
     return this.holidayService.getListOfUniqueCountriesForHolidays(this.listOfHolidays);
   }
+
 
 
 
