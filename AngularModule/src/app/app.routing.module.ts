@@ -7,9 +7,9 @@ import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details
 
 const routes: Routes = [
   { path: '', component: HolidayComponent},
-  { path: 'cities', component: HolidayCitiesListComponent},
+  { path: 'cities/:country', component: HolidayCitiesListComponent},
   { path: 'holidayDetails/:id', component: HolidayDetailsComponent},
-{ path: 'holidays',component: HolidayListComponent}
+  { path: 'holidays',component: HolidayListComponent}
 ];
 
 @NgModule({

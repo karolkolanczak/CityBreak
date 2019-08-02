@@ -2,17 +2,19 @@ export class Holiday{
   private _id: number;
   private _city: string;
   private _country: string;
+  private _capital: string;
   private _description: string;
   private _priceForAdult ;
   private _priceForChild ;
   private _image;
 private _imageToShow;
 
-  constructor(id: number,city: string, country: string, description: string, priceForAdult, priceForChild,image,imageToShow) {
+  constructor(id: number,city: string, country: string, capital: string, description: string, priceForAdult, priceForChild,image,imageToShow) {
     this._id=id;
     this._city = city;
     this._country = country;
     this._description = description;
+    this._capital= capital;
     this._priceForAdult = priceForAdult;
     this._priceForChild = priceForChild;
     this._image=image;
@@ -42,6 +44,14 @@ private _imageToShow;
 
   set country(value: string) {
     this._country = value;
+  }
+
+  get capital(): string {
+    return this._capital;
+  }
+
+  set capital(value: string) {
+    this._capital = value;
   }
 
   get description(): string {

@@ -15,6 +15,7 @@ public class Holiday {
     private int id;
     private String city;
     private String country;
+    private String capital;
 //    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="holiday_details_id")
@@ -78,5 +79,13 @@ public class Holiday {
 
     public void setHolidayDetails(HolidayDetails holidayDetails) {
         this.holidayDetails = holidayDetails;
+    }
+
+    public String getCapital() {
+        return capital;
+    }
+
+    public void setCapital(String capital) {
+        this.capital = capital;
     }
 }

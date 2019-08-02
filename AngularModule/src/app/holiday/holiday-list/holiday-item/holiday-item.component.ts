@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Holiday} from '../../holiday.model';
+import {HolidayService} from '../../holiday.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-holiday-item',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HolidayItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() holiday:Holiday;
+
+  constructor(private holidayService: HolidayService,private router: Router) { }
 
   ngOnInit() {
   }
 
+  selectedCountry(){
+    console.log("Clicked - HolidayItemComponent " +this.holiday);
+    this.holidayService.countrySelected.emit(this.holiday)
+    this.router.navigate(["cities/"+this.holiday.country]);
+  }
 }

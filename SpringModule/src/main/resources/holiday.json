@@ -3,6 +3,7 @@
     "id": 1,
     "city": "Barcelona",
     "country": "Spain",
+    "capital":"no",
     "imagePath": "images/barcelona.jpg",
     "holidayDetails": {
       "priceForAdult": 100,
@@ -15,6 +16,7 @@
     "id": 2,
     "city": "London",
     "country": "United Kingdom",
+    "capital":"yes",
     "imagePath": "images/london.jpg",
     "holidayDetails": {
       "priceForAdult": 120,
@@ -26,6 +28,7 @@
     "id": 3,
     "city": "Lisbon",
     "country": "Portugal",
+    "capital":"yes",
     "imagePath": "images/lisbon.jpg",
     "holidayDetails": {
       "priceForAdult": 90,
@@ -37,6 +40,7 @@
     "id": 4,
     "city": "Rome",
     "country": "Italy",
+    "capital":"yes",
     "imagePath": "images/rome.jpg",
     "holidayDetails": {
       "priceForAdult": 95,
@@ -48,6 +52,7 @@
     "id": 5,
     "city": "Athens",
     "country": "Greece",
+    "capital":"yes",
     "imagePath": "images/athens.jpg",
     "holidayDetails": {
       "priceForAdult": 75,
@@ -59,6 +64,7 @@
     "id": 6,
     "city": "Valencia",
     "country": "Spain",
+    "capital":"no",
     "imagePath": "images/valencia.jpg",
     "holidayDetails": {
       "priceForAdult": 85,
@@ -70,6 +76,7 @@
     "id": 7,
     "city": "Madrid",
     "country": "Spain",
+    "capital":"yes",
     "imagePath": "images/madrid.jpg",
     "holidayDetails": {
       "priceForAdult": 120,
@@ -81,6 +88,7 @@
     "id": 8,
     "city": "Toledo",
     "country": "Spain",
+    "capital":"no",
     "imagePath": "images/toledo.jpg",
     "holidayDetails": {
       "priceForAdult": 70,

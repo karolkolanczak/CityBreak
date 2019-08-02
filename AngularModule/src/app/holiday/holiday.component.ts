@@ -11,32 +11,39 @@ import {interval, Observable, Subscription} from 'rxjs';
 export class HolidayComponent implements OnInit {
 
   selectedCity: Holiday;
-  // listOfHolidays: Holiday[]=[];
+  selectedCountry;
   imageToShow: any;
   isImageLoading: boolean;
-  dataSubscription: Subscription;
-  dataData: Subscription;
+  listOfHolidays;
 
   constructor(private holidayService: HolidayService) { }
 
   ngOnInit() {
 
-    // this.holidayService.getListOfHolidays()
-    //   .subscribe(data => {
-    //     this.listOfHolidays=this.holidayService.convertData(data);
-    // });
+    this.holidayService.getListOfHolidays()
+      .subscribe(data => {
+        this.listOfHolidays=this.holidayService.convertData(data);
+      });
+
 
     this.holidayService.citySelected
       .subscribe(
         (holiday: Holiday)=>{
           this.imageToShow=this.getImageFromService(holiday.id);
-          console.log("HOLIDAY ID: : "+holiday.id)
-            if(this.imageToShow===undefined){
+            console.log("HOLIDAY ID: : "+holiday.id)
+              if(this.imageToShow===undefined){
               setTimeout(()=>{
-                this.selectedCity=new Holiday(holiday.id,holiday.city,holiday.country,holiday.description,holiday.priceForAdult,holiday.priceForChild,this.imageToShow,this.imageToShow)
+                this.selectedCity=new Holiday(holiday.id,holiday.city,holiday.country,holiday.capital,holiday.description,holiday.priceForAdult,holiday.priceForChild,this.imageToShow,this.imageToShow)
                 console.log("Clicked -  HolidayComponent " +this.selectedCity.country+" "+this.selectedCity.city+this.selectedCity.priceForAdult);
-              }, 200);
+                }, 250);
           }
+        }
+      );
+
+    this.holidayService.countrySelected
+      .subscribe((country )=>{
+          this.selectedCountry=country;
+          console.log("Holiday Component: clicked -  "+this.selectedCountry);
         }
       );
   }
@@ -64,7 +71,4 @@ export class HolidayComponent implements OnInit {
       }
     }
 
-  clicked(event){
-    console.log("?????? CLICKED");
-  }
 }
