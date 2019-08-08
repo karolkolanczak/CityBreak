@@ -2,6 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HolidayService} from './holiday.service';
 import {Holiday} from './holiday.model';
 import {interval, Observable, Subscription} from 'rxjs';
+import {JsonPipe} from '@angular/common';
+import {DataStorageService} from '../shared/data-storage.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-holiday',
@@ -14,17 +17,18 @@ export class HolidayComponent implements OnInit {
   selectedCountry;
   imageToShow: any;
   isImageLoading: boolean;
-  listOfHolidays;
+  listOfHolidays: Holiday[]=[];
 
-  constructor(private holidayService: HolidayService) { }
+  constructor(private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
+    this.listOfHolidays=this.route.snapshot.data['holidaysList'];
+  }
 
   ngOnInit() {
 
-    this.holidayService.getListOfHolidays()
-      .subscribe(data => {
-        this.listOfHolidays=this.holidayService.convertData(data);
-      });
-
+    // this.holidayService.getListOfHolidays()
+    //   .subscribe(data => {
+    //     this.listOfHolidays=this.holidayService.convertData(data);
+    //   });
 
     this.holidayService.citySelected
       .subscribe(
@@ -69,6 +73,13 @@ export class HolidayComponent implements OnInit {
       if (image) {
         reader.readAsDataURL(image);
       }
+    }
+
+    addCountry(){
+      let tempHoliday: Holiday = {} as Holiday;
+      tempHoliday=new Holiday(10,'gdynia',"Poland",'yes','ladnie bardzo ladnie',100,80,null,null);
+      this.listOfHolidays.push(tempHoliday);
+      this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     }
 
 }

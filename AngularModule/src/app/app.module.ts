@@ -15,6 +15,8 @@ import {HolidayCitiesListComponent} from './holiday/holiday-cities-list/holiday-
 import {HolidayCitiesItemComponent} from './holiday/holiday-cities-list/holiday-cities-item/holiday-cities-item.component';
 import {HolidayCitiesTabItemComponent} from './holiday/holiday-cities-list/holiday-cities-tab-item/holiday-cities-tab-item.component';
 import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details.component';
+import {DataStorageService} from './shared/data-storage.service';
+import {HolidayResolverService} from './holiday/holiday-resolver.service';
 
 
 
@@ -37,7 +39,7 @@ import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details
     FormsModule,
     HttpClientModule
   ],
-  providers: [HolidayService],
+  providers: [HolidayService,DataStorageService,HolidayResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

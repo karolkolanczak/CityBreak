@@ -15,6 +15,7 @@ export class HolidayService {
 
   citySelected = new EventEmitter<Holiday>();
   countrySelected = new EventEmitter<Holiday>();
+  listOfHolidaysChanged= new EventEmitter<Holiday[]>();
 
   constructor(private http: HttpClient){
     this.url = 'http://localhost:8080/api/';
@@ -23,6 +24,10 @@ export class HolidayService {
   // http://localhost:8080/api/holidays
   getListOfHolidays(): Observable<any>{
     return this.http.get(this.url+'holidays');
+  }
+
+  setListOfAllfHolidays(listOfAllHolidays :Holiday []){
+    this.listOfHolidaysChanged.emit(listOfAllHolidays)
   }
 
   getImage(holidayId: number): Observable<Blob>{
@@ -52,6 +57,11 @@ export class HolidayService {
     return tempListOfHolidays;
   };
 
+  // setListOfAllfHolidays(listOfAllHolidays :Holiday []){
+  //   console.log("3: data: ");
+  //   console.log(listOfAllHolidays);
+  //   this.listOfHolidaysChanged.emit(listOfAllHolidays)
+  // }
 
   convertData(data): Holiday[]{
     let listOfHolidays: Holiday[]=[];
