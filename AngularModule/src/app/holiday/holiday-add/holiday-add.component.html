@@ -1,0 +1,62 @@
+<h2>Add new Holiday</h2><br/>
+
+<div class="container">
+  <!--<form class="form-horizontal" (ngSubmit)="addHoliday(holidayForm)" #holidayForm="ngForm"> &ndash;&gt; alternative 2-->
+  <form class="form-horizontal" (ngSubmit)="addHoliday()" #holidayForm="ngForm">
+    <div class="form-group">
+      <label class="col-sm-2 control-label" >City</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ngModel="Gdynia" name="city" required #cityInput="ngModel">
+      </div>
+      <div class="col-sm-3 control-label alertInfoClass" id="" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Country:</label>
+      <div class="dropdown col-sm-2">
+        <select class="form-control" [(ngModel)]="listOfUniqueCountriesForHolidays[0].country" name="country">
+          <option *ngFor="let tempCountry of listOfUniqueCountriesForHolidays" [value]="tempCountry.country">{{tempCountry.country}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" >Price for adult:</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ngModel="100" name="priceForAdult" required #priceForAdultInput="ngModel">
+      </div>
+      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForAdultInput.valid && priceForAdultInput.touched">Please enter a price for adult.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" >Price for child:</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ngModel="80" name="priceForChild" required #priceForChildInput="ngModel">
+      </div>
+      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForChildInput.valid && priceForChildInput.touched">Please enter a price for child.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Description:</label>
+      <div class="col-sm-5">
+        <textarea class="form-control"  rows="3" ngModel="very nice" name="description" required #descriptionInput="ngModel"></textarea>
+      </div>
+      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!descriptionInput.valid && descriptionInput.touched">Please enter a description.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Image:</label>
+      <div class="col-sm-5">
+        <input type="file" class="file" ngModel="" name="image"  #imageInput/>
+      </div>
+      <!--<div class="col-sm-3 control-label alertInfoClass" *ngIf="!imageInput.valid && imageInput.touched">Please choose a image from disk.</div>-->
+    </div>
+
+    <div class="form-group">
+      <div class="row col-sm-3 control-label" style="margin-bottom: 100px">
+        <button type="submit" class="btn btn-primary" [disabled]="!holidayForm.valid">Add</button>
+      </div>
+    </div>
+
+  </form>
+</div>
