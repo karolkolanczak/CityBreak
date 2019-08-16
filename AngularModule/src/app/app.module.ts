@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { HolidayComponent } from './holiday/holiday.component';
@@ -17,6 +16,8 @@ import {HolidayCitiesTabItemComponent} from './holiday/holiday-cities-list/holid
 import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details.component';
 import {DataStorageService} from './shared/data-storage.service';
 import {HolidayResolverService} from './holiday/holiday-resolver.service';
+import {HolidayDetailsEditComponent} from './holiday/holiday-details-edit/holiday-details-edit.component';
+import {HolidayAddComponent} from './holiday/holiday-add/holiday-add.component';
 
 
 
@@ -31,7 +32,9 @@ import {HolidayResolverService} from './holiday/holiday-resolver.service';
     HolidayCitiesListComponent,
     HolidayCitiesItemComponent,
     HolidayCitiesTabItemComponent,
-    HolidayDetailsComponent
+    HolidayDetailsComponent,
+    HolidayDetailsEditComponent,
+    HolidayAddComponent
   ],
   imports: [
     BrowserModule,

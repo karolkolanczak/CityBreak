@@ -15,11 +15,14 @@ export class HolidayItemComponent implements OnInit {
   constructor(private holidayService: HolidayService,private router: Router) { }
 
   ngOnInit() {
+
   }
 
   selectedCountry(){
-    console.log("Clicked - HolidayItemComponent " +this.holiday);
+    // console.log("Clicked - HolidayItemComponent " +this.holiday);
     this.holidayService.countrySelected.emit(this.holiday)
     this.router.navigate(["cities/"+this.holiday.country]);
   }
+
+
 }

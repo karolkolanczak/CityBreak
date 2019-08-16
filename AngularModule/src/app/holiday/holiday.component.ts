@@ -4,7 +4,7 @@ import {Holiday} from './holiday.model';
 import {interval, Observable, Subscription} from 'rxjs';
 import {JsonPipe} from '@angular/common';
 import {DataStorageService} from '../shared/data-storage.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-holiday',
@@ -19,7 +19,7 @@ export class HolidayComponent implements OnInit {
   isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
 
-  constructor(private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
+  constructor(private router: Router, private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
     this.listOfHolidays=this.route.snapshot.data['holidaysList'];
   }
 
@@ -34,11 +34,11 @@ export class HolidayComponent implements OnInit {
       .subscribe(
         (holiday: Holiday)=>{
           this.imageToShow=this.getImageFromService(holiday.id);
-            console.log("HOLIDAY ID: : "+holiday.id)
+            // console.log("HOLIDAY ID: : "+holiday.id)
               if(this.imageToShow===undefined){
               setTimeout(()=>{
                 this.selectedCity=new Holiday(holiday.id,holiday.city,holiday.country,holiday.capital,holiday.description,holiday.priceForAdult,holiday.priceForChild,this.imageToShow,this.imageToShow)
-                console.log("Clicked -  HolidayComponent " +this.selectedCity.country+" "+this.selectedCity.city+this.selectedCity.priceForAdult);
+                // console.log("Clicked -  HolidayComponent " +this.selectedCity.country+" "+this.selectedCity.city+this.selectedCity.priceForAdult);
                 }, 250);
           }
         }
@@ -47,13 +47,13 @@ export class HolidayComponent implements OnInit {
     this.holidayService.countrySelected
       .subscribe((country )=>{
           this.selectedCountry=country;
-          console.log("Holiday Component: clicked -  "+this.selectedCountry);
+          // console.log("Holiday Component: clicked -  "+this.selectedCountry);
         }
       );
   }
 
   getImageFromService(holidayId: number) {
-    console.log("HolidayID: "+holidayId);
+    // console.log("HolidayID: "+holidayId);
       this.isImageLoading = true;
       this.holidayService.getImage(holidayId).subscribe(data => {
         this.createImageFromBlob(data);
@@ -64,7 +64,9 @@ export class HolidayComponent implements OnInit {
       });
     }
 
+
     createImageFromBlob(image: Blob) {
+      // console.log( image instanceof Blob)
       let reader = new FileReader();
       reader.addEventListener("load", () => {
          this.imageToShow = reader.result;
@@ -81,5 +83,9 @@ export class HolidayComponent implements OnInit {
       this.listOfHolidays.push(tempHoliday);
       this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     }
+
+  redirectToAddHoliday(){
+    this.router.navigate(['/holiday/add']);
+  }
 
 }

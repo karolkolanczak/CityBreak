@@ -24,14 +24,14 @@ export class HolidayCitiesListComponent implements OnInit {
 
     this.route.params.subscribe(
         (params: Params)=>{
-          console.log("@@@@@@@@@@@: "+ params['country']);
+          // console.log("@@@@@@@@@@@: "+ params['country']);
           this.selectedCountry=params['country'];
         }
       );
   }
 
   getListOfUniqueCitiesInSelectedCountry(): string[]{
-    console.log("++++"+this.selectedCountry);
+    // console.log("++++"+this.selectedCountry);
       return this.holidayService.getListOfUniqueCitiesInSelectedCountry(this.listOfHolidays,this.selectedCountry);
     // return this.holidayService.getListOfUniqueCitiesInSelectedCountry(this.listOfHolidays,"Spain");
   }

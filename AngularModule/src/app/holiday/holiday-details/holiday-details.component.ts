@@ -1,7 +1,7 @@
 import {Component, Directive, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {HolidayService} from '../holiday.service';
 import {Holiday} from '../holiday.model';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-holiday-details',
@@ -16,8 +16,10 @@ export class HolidayDetailsComponent implements OnInit {
   imageToShow: any;
   isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
+  holidayId: number;
+  text;
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute) { }
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
@@ -28,8 +30,9 @@ export class HolidayDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params)=>{
-          console.log("@@@@@@@@@@@: "+ params['id']);
+          // console.log("Param id: "+ params['id']);
           this.imageToShow=this.getImageFromService(params['id']);
+          this.holidayId=params['id'];
         }
       );
 
@@ -59,5 +62,9 @@ export class HolidayDetailsComponent implements OnInit {
     }
   }
 
+  redirectToEditHoliday(){
+    console.log("Redirected to: ");
+    this.router.navigate(['/holidayDetails/'+this.holidayId+'/edit']);
+  }
 
 }

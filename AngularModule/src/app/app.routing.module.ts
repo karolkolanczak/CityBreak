@@ -5,11 +5,15 @@ import {HolidayCitiesListComponent} from './holiday/holiday-cities-list/holiday-
 import {HolidayListComponent} from './holiday/holiday-list/holiday-list.component';
 import {HolidayDetailsComponent} from './holiday/holiday-details/holiday-details.component';
 import {HolidayResolverService} from './holiday/holiday-resolver.service';
+import {HolidayDetailsEditComponent} from './holiday/holiday-details-edit/holiday-details-edit.component';
+import {HolidayAddComponent} from './holiday/holiday-add/holiday-add.component';
 
 const routes: Routes = [
   { path: '', component: HolidayComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'cities/:country', component: HolidayCitiesListComponent},
   { path: 'holidayDetails/:id', component: HolidayDetailsComponent},
+  { path: 'holidayDetails/:id/edit', component: HolidayDetailsEditComponent},
+  { path: 'holiday/add',component: HolidayAddComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holidays',component: HolidayListComponent}
 ];
 
