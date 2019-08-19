@@ -11,29 +11,23 @@ import {ActivatedRoute, Params} from '@angular/router';
 export class HolidayCitiesListComponent implements OnInit {
 
   listOfHolidays: Holiday[]=[];
-  selectedCountry;
+  selectedCountry: string;
 
   constructor(private holidayService: HolidayService, private route:ActivatedRoute) {
+    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {
-
-    this.holidayService.getListOfHolidays().subscribe(data => {
-      this.listOfHolidays=this.holidayService.convertData(data);
-    });
-
     this.route.params.subscribe(
         (params: Params)=>{
-          // console.log("@@@@@@@@@@@: "+ params['country']);
+          console.log("Param country selected: : "+ params['country']);
           this.selectedCountry=params['country'];
         }
       );
   }
 
   getListOfUniqueCitiesInSelectedCountry(): string[]{
-    // console.log("++++"+this.selectedCountry);
       return this.holidayService.getListOfUniqueCitiesInSelectedCountry(this.listOfHolidays,this.selectedCountry);
-    // return this.holidayService.getListOfUniqueCitiesInSelectedCountry(this.listOfHolidays,"Spain");
   }
 
 

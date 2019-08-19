@@ -15,7 +15,6 @@ export class HolidayItemComponent implements OnInit {
   constructor(private holidayService: HolidayService,private router: Router) { }
 
   ngOnInit() {
-
   }
 
   selectedCountry(){

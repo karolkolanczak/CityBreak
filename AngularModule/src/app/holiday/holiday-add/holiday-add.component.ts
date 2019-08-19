@@ -17,7 +17,7 @@ export class HolidayAddComponent implements OnInit {
   listOfUniqueCountriesForHolidays: Holiday[]=[];
 
   constructor(private holidayService: HolidayService,private route: ActivatedRoute) {
-    this.listOfHolidays= this.conv(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
     // this.addHolidayForm.value.city="Gdynia"
   }
@@ -40,13 +40,7 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
     console.log(this.holiday);
-  }
-
-  conv(data):Holiday[]{
-
-    let tempList1:Holiday[]=[];
-    tempList1=this.holidayService.convertData(data);
-    return tempList1;
+    // this.addHolidayForm.reset();
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[]{

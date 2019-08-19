@@ -17,14 +17,7 @@ export class HolidayListComponent implements OnInit {
   isImageLoading: boolean;
 
   constructor(private holidayService: HolidayService, private route: ActivatedRoute, private dataStorageService: DataStorageService,) {
-
-    this.listOfHolidays= this.conv(this.route.snapshot.data['holidaysList']);
-    // console.log("---");
-    // console.log(this.listOfHolidays);
-
-
-
-    // this.listOfHolidays=this.route.snapshot.data['holidaysList'];
+    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {
@@ -84,15 +77,6 @@ console.log("ONINIT");
     return this.holidayService.getListOfUniqueCountriesForHolidays(this.listOfHolidays);
   }
 
-  conv(data):Holiday[]{
-
-    let tempList1:Holiday[]=[];
-    tempList1=this.holidayService.convertData(data);
-    // console.log("CONV");
-    // console.log(tempList1);
-
-    return tempList1;
-  }
 
 
   //

@@ -11,34 +11,29 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 export class HolidayDetailsComponent implements OnInit {
-
-  @Input() holiday: Holiday;
+  holiday: Holiday;
+  // @Input() holiday: Holiday;
   imageToShow: any;
   isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
   holidayId: number;
   text;
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router) { }
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router) {
+    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+  }
 
   ngOnInit() {
-
-    this.holidayService.getListOfHolidays().subscribe(data => {
-      this.listOfHolidays=this.holidayService.convertData(data);
-    });
 
     this.route.params
       .subscribe(
         (params: Params)=>{
-          // console.log("Param id: "+ params['id']);
-          this.imageToShow=this.getImageFromService(params['id']);
+          // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
+          this.holiday=this.getHolidayById(this.holidayId);
         }
       );
-
   }
-
-
 
   getImageFromService(holidayId:number) {
     this.isImageLoading = true;
@@ -56,7 +51,6 @@ export class HolidayDetailsComponent implements OnInit {
     reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
     }, false);
-
     if (image) {
       reader.readAsDataURL(image);
     }
@@ -65,6 +59,16 @@ export class HolidayDetailsComponent implements OnInit {
   redirectToEditHoliday(){
     console.log("Redirected to: ");
     this.router.navigate(['/holidayDetails/'+this.holidayId+'/edit']);
+  }
+
+  getHolidayById(holidayId: number): Holiday {
+    let tempHoliday: Holiday = {} as Holiday;
+    for (let value of this.listOfHolidays) {
+      if (value.id == holidayId) {
+        tempHoliday=value;
+      }
+    }
+    return tempHoliday;
   }
 
 }

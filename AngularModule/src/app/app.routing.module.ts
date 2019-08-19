@@ -10,8 +10,8 @@ import {HolidayAddComponent} from './holiday/holiday-add/holiday-add.component';
 
 const routes: Routes = [
   { path: '', component: HolidayComponent,resolve:{holidaysList: HolidayResolverService}},
-  { path: 'cities/:country', component: HolidayCitiesListComponent},
-  { path: 'holidayDetails/:id', component: HolidayDetailsComponent},
+  { path: 'cities/:country', component: HolidayCitiesListComponent,resolve:{holidaysList: HolidayResolverService}},
+  { path: 'holidayDetails/:id', component: HolidayDetailsComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holidayDetails/:id/edit', component: HolidayDetailsEditComponent},
   { path: 'holiday/add',component: HolidayAddComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holidays',component: HolidayListComponent}
