@@ -30,7 +30,7 @@ export class HolidayDetailsComponent implements OnInit {
         (params: Params)=>{
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
-          this.holiday=this.getHolidayById(this.holidayId);
+          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
         }
       );
   }
@@ -57,18 +57,12 @@ export class HolidayDetailsComponent implements OnInit {
   }
 
   redirectToEditHoliday(){
-    console.log("Redirected to: ");
-    this.router.navigate(['/holidayDetails/'+this.holidayId+'/edit']);
+    console.log("Button: Edit\" ");
+    this.router.navigate(['holidayDetails/'+this.holidayId+'/edit']);
   }
 
-  getHolidayById(holidayId: number): Holiday {
-    let tempHoliday: Holiday = {} as Holiday;
-    for (let value of this.listOfHolidays) {
-      if (value.id == holidayId) {
-        tempHoliday=value;
-      }
-    }
-    return tempHoliday;
+  deleteHoliday(){
+    console.log("Button: delete");
   }
 
 }

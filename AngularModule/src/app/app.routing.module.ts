@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: HolidayComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'cities/:country', component: HolidayCitiesListComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holidayDetails/:id', component: HolidayDetailsComponent,resolve:{holidaysList: HolidayResolverService}},
-  { path: 'holidayDetails/:id/edit', component: HolidayDetailsEditComponent},
+  { path: 'holidayDetails/:id/edit', component: HolidayDetailsEditComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holiday/add',component: HolidayAddComponent,resolve:{holidaysList: HolidayResolverService}},
   { path: 'holidays',component: HolidayListComponent}
 ];

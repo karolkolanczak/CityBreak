@@ -34,6 +34,7 @@ export class HolidayAddComponent implements OnInit {
 // alternative 1
   addHoliday(){
     console.log("Added Holiday: ");
+    console.log(this.addHolidayForm)
     this.holiday.city=this.addHolidayForm.value.city;
     this.holiday.country=this.addHolidayForm.value.country;
     this.holiday.priceForAdult=this.addHolidayForm.value.priceForAdult;

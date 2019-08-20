@@ -97,4 +97,14 @@ export class HolidayService {
     }
     return listOfHolidays;
   }
+
+  getHolidayById(holidayId: number, listOfHolidays: Holiday[]): Holiday {
+    let tempHoliday: Holiday = {} as Holiday;
+    for (let value of listOfHolidays) {
+      if (value.id == holidayId) {
+        tempHoliday=value;
+      }
+    }
+    return tempHoliday;
+  }
 }
