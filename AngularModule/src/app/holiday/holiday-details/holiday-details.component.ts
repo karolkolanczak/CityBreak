@@ -65,7 +65,8 @@ export class HolidayDetailsComponent implements OnInit {
     console.log("Button: delete");
     // this.listOfHolidays.splice(this.holidayId-1,1);
     // console.log(this.listOfHolidays);
-    this.router.navigate(['cities/'+this.holiday.country]);
+
+    // this.router.navigate(['cities/'+this.holiday.country]);
   }
 
 }

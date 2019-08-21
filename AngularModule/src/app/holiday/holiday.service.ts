@@ -44,6 +44,21 @@ export class HolidayService {
     return forkJoin(tempListOfResponses);
   }
 
+  // getData(){
+  //   return this.http.get(this.url+'holidays')
+  //     .pipe(map(initData=>{
+  //
+  //       for(let value of initData){
+  //         console.log(value.image)
+  //         .pipe(map(value.image))
+  //       }
+  //         return initData;
+  //       }))
+  //     .subscribe(data=>{
+  //       console.log(data);
+  //     })
+  // }
+
   getListOfUniqueCountriesForHolidays(listOfHolidays: Holiday[]): Holiday[] {
 
     let tempListOfHolidays: Holiday []= [];
@@ -125,4 +140,13 @@ export class HolidayService {
       })
   }
 
+  updateHolidayInDatabase(holiday:Holiday){
+    console.log("Posting");
+    let tempHoliday=this.convertDataToAPI(holiday);
+    this.http.put(this.url+'updateHoliday',tempHoliday)
+      .subscribe(data=>{
+        console.log("Response: ");
+        console.log(data);
+      })
+  }
 }

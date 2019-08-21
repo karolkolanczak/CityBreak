@@ -10,7 +10,7 @@ import {Holiday} from '../holiday.model';
   styleUrls: ['./holiday-add.component.css']
 })
 export class HolidayAddComponent implements OnInit {
-// alternative 1
+
   @ViewChild('holidayForm',{ static: false}) addHolidayForm:NgForm;
   holiday: Holiday={} as Holiday;
   listOfHolidays: Holiday[]=[];

@@ -51,8 +51,9 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // console.log(this.holiday);
     console.log(this.listOfHolidays);
+    this.holidayService.updateHolidayInDatabase(this.holiday)
     // this.holidayUpdateForm.reset();
-    this.router.navigate(["holidayDetails/"+this.holidayId]);
+    // this.router.navigate(["holidayDetails/"+this.holidayId]);
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[] {
