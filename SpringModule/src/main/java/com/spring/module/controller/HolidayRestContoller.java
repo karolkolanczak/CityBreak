@@ -39,9 +39,7 @@ public class HolidayRestContoller {
             if(value.getImage() !=null){
                 convertByteArrayToBufferedImage(value.getImage());
             }
-
         }
-
         return listOfHolidays;
     }
 
@@ -53,9 +51,17 @@ public class HolidayRestContoller {
         return holiday;
     }
 
+    @PutMapping("/updateHoliday")
+    public Holiday updateHoliday(@RequestBody Holiday holiday){
+        holidayService.saveHoliday(holiday);
+        return holiday;
+    }
 
-
-
+    @DeleteMapping("/deleteHoliday/{holidayId}")
+    public String deleteHoliday(@PathVariable int holidayId) {
+        holidayService.deleteHoliday(holidayId);
+        return "Deleted holiday with Id: "+holidayId;
+    }
 
     // convert byte array back to BufferedImage
     void convertByteArrayToBufferedImage(Byte[] byteImageObject) throws IOException {

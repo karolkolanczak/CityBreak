@@ -101,7 +101,7 @@ export class HolidayService {
       // console.log("IMAGE: ")
       // console.log(image);
       // console.log( image instanceof Blob)
-      holidayTemp=new Holiday(value.id,value.city,value.country,value.capital,value.holidayDetails.description,value.holidayDetails.priceForAdult,value.holidayDetails.priceForChild,value.image,image)
+      holidayTemp=new Holiday(value.id,value.city,value.country,value.capital,value.holidayDetails.id, value.holidayDetails.description,value.holidayDetails.priceForAdult,value.holidayDetails.priceForChild,value.image,image)
       // console.log("OOOO: "+value.id +" | "+value.city+" | "+value.country);
       listOfHolidays.push(holidayTemp)
     }
@@ -115,9 +115,9 @@ export class HolidayService {
       id:holiday.id,
       city: holiday.city,
       country: holiday.country,
-      // "capital": "no",
+      capital: holiday.capital,
       holidayDetails: {
-        // "id": 1,
+        id: holiday.holidayDetailsId,
         description: holiday.description,
         priceForAdult: holiday.priceForAdult,
         priceForChild: holiday.priceForChild
@@ -135,7 +135,7 @@ export class HolidayService {
 
     this.http.post(this.url+'addHoliday',tempHoliday)
       .subscribe(data=>{
-        console.log("Response: ");
+        console.log("Add: response from Database: : ");
         console.log(data);
       })
   }
@@ -145,8 +145,19 @@ export class HolidayService {
     let tempHoliday=this.convertDataToAPI(holiday);
     this.http.put(this.url+'updateHoliday',tempHoliday)
       .subscribe(data=>{
-        console.log("Response: ");
+        console.log("Update: response from Database:  ");
         console.log(data);
       })
   }
+
+  deleteHoliday(holidayId){
+    console.log("Delete: "+holidayId) ;
+
+    this.http.delete(this.url+'deleteHoliday/'+holidayId)
+      .subscribe(data=>{
+        console.log("Delete: response from Database:  ");
+        console.log(data);
+      })
+  }
+
 }

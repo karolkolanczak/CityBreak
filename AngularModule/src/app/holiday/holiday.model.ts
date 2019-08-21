@@ -3,16 +3,18 @@ export class Holiday{
   private _city: string;
   private _country: string;
   private _capital: string;
+  private _holidayDetailsId;
   private _description: string;
   private _priceForAdult ;
   private _priceForChild ;
   private _image;
 private _imageToShow;
 
-  constructor(id: number,city: string, country: string, capital: string, description: string, priceForAdult, priceForChild,image,imageToShow) {
+  constructor(id: number,city: string, country: string, capital: string, holidayDetailsId, description: string, priceForAdult, priceForChild,image,imageToShow) {
     this._id=id;
     this._city = city;
     this._country = country;
+    this._holidayDetailsId=holidayDetailsId;
     this._description = description;
     this._capital= capital;
     this._priceForAdult = priceForAdult;
@@ -32,6 +34,14 @@ private _imageToShow;
 
   get city(): string {
     return this._city;
+  }
+
+  get holidayDetailsId() {
+    return this._holidayDetailsId;
+  }
+
+  set holidayDetailsId(value) {
+    this._holidayDetailsId = value;
   }
 
   set city(value: string) {

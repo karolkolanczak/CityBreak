@@ -37,7 +37,7 @@ export class HolidayComponent implements OnInit {
             // console.log("HOLIDAY ID: : "+holiday.id)
               if(this.imageToShow===undefined){
               setTimeout(()=>{
-                this.selectedCity=new Holiday(holiday.id,holiday.city,holiday.country,holiday.capital,holiday.description,holiday.priceForAdult,holiday.priceForChild,this.imageToShow,this.imageToShow)
+                this.selectedCity=new Holiday(holiday.id,holiday.city,holiday.country,holiday.capital,holiday.holidayDetailsId,holiday.description,holiday.priceForAdult,holiday.priceForChild,this.imageToShow,this.imageToShow)
                 // console.log("Clicked -  HolidayComponent " +this.selectedCity.country+" "+this.selectedCity.city+this.selectedCity.priceForAdult);
                 }, 250);
           }
@@ -79,7 +79,7 @@ export class HolidayComponent implements OnInit {
 
     addCountry(){
       let tempHoliday: Holiday = {} as Holiday;
-      tempHoliday=new Holiday(10,'gdynia',"Poland",'yes','ladnie bardzo ladnie',100,80,null,null);
+      tempHoliday=new Holiday(10,'gdynia',"Poland",'yes',100,'ladnie bardzo ladnie',100,80,null,null);
       this.listOfHolidays.push(tempHoliday);
       this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     }

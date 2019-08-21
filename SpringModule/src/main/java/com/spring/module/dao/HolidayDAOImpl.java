@@ -43,5 +43,9 @@ public class HolidayDAOImpl implements HolidayDAO {
     @Override
     public void deleteHoliday(int holidayId) {
 
+        Query theQuery =getSession().createQuery("delete from Holiday where id=:holidayId");
+        theQuery.setParameter("holidayId", holidayId);
+
+        theQuery.executeUpdate();
     }
 }
