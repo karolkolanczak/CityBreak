@@ -31,43 +31,22 @@ export class HolidayService {
     return this.http.get(this.url+'image/'+holidayId, { responseType: 'blob' });
   }
 
-  public requestDataFromMultipleSources(listOfHolidays:Holiday[]): Observable<any[]> {
-    let tempListOfResponses = [];
-    for( let value of listOfHolidays){
-      tempListOfResponses.push(this.http.get(this.url+'image/'+value.id, { responseType: 'blob' }));
-    }
-    // let response1 =  this.http.get(this.url+'image/'+holidayId, { responseType: 'blob' });
-    // let response2 = this.http.get(requestUrl2);
-    // let response3 = this.http.get(requestUrl3);
-    // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
-    // return forkJoin([response1, response2, response3]);
-    return forkJoin(tempListOfResponses);
-  }
-
-  // getData(){
-  //   return this.http.get(this.url+'holidays')
-  //     .pipe(map(initData=>{
-  //
-  //       for(let value of initData){
-  //         console.log(value.image)
-  //         .pipe(map(value.image))
-  //       }
-  //         return initData;
-  //       }))
-  //     .subscribe(data=>{
-  //       console.log(data);
-  //     })
-  // }
-
   getListOfUniqueCountriesForHolidays(listOfHolidays: Holiday[]): Holiday[] {
-
     let tempListOfHolidays: Holiday []= [];
-
-    for (let value of listOfHolidays) {
-      if (value.capital === 'yes') {
-        tempListOfHolidays.push(value);
-      }
+    let listOfUniqueCountries: string[] = [...new Set(listOfHolidays.map(value => value.country))];
+    for (let uniqueCountry of listOfUniqueCountries) {
+          for(let value of listOfHolidays){
+            if(value.country===uniqueCountry){
+              tempListOfHolidays.push(value);
+              break;
+            }
+          }
     }
+    // for (let value of listOfHolidays) {
+    //   if (value.capital === 'yes') {
+    //     tempListOfHolidays.push(value);
+    //   }
+    // }
     return tempListOfHolidays;
   }
 
@@ -159,5 +138,33 @@ export class HolidayService {
         console.log(data);
       })
   }
+
+  public requestDataFromMultipleSources(listOfHolidays:Holiday[]): Observable<any[]> {
+    let tempListOfResponses = [];
+    for( let value of listOfHolidays){
+      tempListOfResponses.push(this.http.get(this.url+'image/'+value.id, { responseType: 'blob' }));
+    }
+    // let response1 =  this.http.get(this.url+'image/'+holidayId, { responseType: 'blob' });
+    // let response2 = this.http.get(requestUrl2);
+    // let response3 = this.http.get(requestUrl3);
+    // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
+    // return forkJoin([response1, response2, response3]);
+    return forkJoin(tempListOfResponses);
+  }
+
+  // getData(){
+  //   return this.http.get(this.url+'holidays')
+  //     .pipe(map(initData=>{
+  //
+  //       for(let value of initData){
+  //         console.log(value.image)
+  //         .pipe(map(value.image))
+  //       }
+  //         return initData;
+  //       }))
+  //     .subscribe(data=>{
+  //       console.log(data);
+  //     })
+  // }
 
 }

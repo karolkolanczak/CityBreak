@@ -42,10 +42,12 @@ public class HolidayDAOImpl implements HolidayDAO {
 
     @Override
     public void deleteHoliday(int holidayId) {
+        Holiday holiday=getHoliday(holidayId);
+        getSession().delete(holiday);
 
-        Query theQuery =getSession().createQuery("delete from Holiday where id=:holidayId");
-        theQuery.setParameter("holidayId", holidayId);
-
-        theQuery.executeUpdate();
+//        below deletes only 'Holiday' not 'HolidayDetails'
+//        Query theQuery =getSession().createQuery("delete from Holiday where id=:holidayId");
+//        theQuery.setParameter("holidayId", holidayId);
+//        theQuery.executeUpdate();
     }
 }
