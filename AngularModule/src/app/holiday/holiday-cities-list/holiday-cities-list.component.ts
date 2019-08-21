@@ -14,7 +14,7 @@ export class HolidayCitiesListComponent implements OnInit {
   selectedCountry: string;
 
   constructor(private holidayService: HolidayService, private route:ActivatedRoute) {
-    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {

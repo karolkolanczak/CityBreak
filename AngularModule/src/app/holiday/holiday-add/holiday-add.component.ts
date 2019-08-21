@@ -17,30 +17,29 @@ export class HolidayAddComponent implements OnInit {
   listOfUniqueCountriesForHolidays: Holiday[]=[];
 
   constructor(private holidayService: HolidayService,private route: ActivatedRoute) {
-    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
-    // this.addHolidayForm.value.city="Gdynia"
-  }
+}
 
   ngOnInit() {
-
+    this.holidayService.listOfHolidaysChanged.subscribe((data)=>{
+        this.listOfHolidays=data;
+      }
+    );
   }
-  // alternative 2
-  // addHoliday(form:NgForm){
-  //   console.log("Added Holiday: ");
-  //   console.log(form);
-  // }
 
-// alternative 1
   addHoliday(){
-    console.log("Added Holiday: ");
-    console.log(this.addHolidayForm)
     this.holiday.city=this.addHolidayForm.value.city;
     this.holiday.country=this.addHolidayForm.value.country;
     this.holiday.priceForAdult=this.addHolidayForm.value.priceForAdult;
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
-    console.log(this.holiday);
+
+    this.listOfHolidays.push(this.holiday)
+    this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
+
+    this.holidayService.addHolidayToDatabase(this.holiday);
+
     // this.addHolidayForm.reset();
   }
 

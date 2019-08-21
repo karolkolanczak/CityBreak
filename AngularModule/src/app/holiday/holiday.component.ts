@@ -27,7 +27,7 @@ export class HolidayComponent implements OnInit {
 
     // this.holidayService.getListOfHolidays()
     //   .subscribe(data => {
-    //     this.listOfHolidays=this.holidayService.convertData(data);
+    //     this.listOfHolidays=this.holidayService.convertDataFromAPI(data);
     //   });
 
     this.holidayService.citySelected

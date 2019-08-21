@@ -25,7 +25,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
         ObjectMapper mapper = new ObjectMapper();
 
-
         List<Holiday> listOfHolidays=new ArrayList<>();
 
         Holiday holiday = new Holiday();
@@ -33,11 +32,9 @@ public class DatabaseLoader implements CommandLineRunner {
         try {
             Holiday [] arrayOfHolidays = mapper.readValue(new File("SpringModule/src/main/resources/holiday.json"), Holiday[].class);
 
-
             listOfHolidays = Arrays.asList(arrayOfHolidays);
 
             for(Holiday value: listOfHolidays){
-
                 // below in order to create new id
                 value.setId(0);
                 if(value.getImagePath()!=null){

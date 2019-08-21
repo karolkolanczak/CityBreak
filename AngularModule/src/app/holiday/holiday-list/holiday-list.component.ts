@@ -17,14 +17,10 @@ export class HolidayListComponent implements OnInit {
   isImageLoading: boolean;
 
   constructor(private holidayService: HolidayService, private route: ActivatedRoute, private dataStorageService: DataStorageService,) {
-    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {
-
-    this.holidayService.text.subscribe(data=>
-    console.log("TEXT: "+data)
-    )
 
 console.log("ONINIT");
     this.holidayService.listOfHolidaysChanged
@@ -56,7 +52,7 @@ console.log("ONINIT");
     });
     // this.holidayService.getListOfHolidays()
     //   .subscribe(data => {
-    //   this.listOfHolidays=this.holidayService.convertData(data);
+    //   this.listOfHolidays=this.holidayService.convertDataFromAPI(data);
     // });
 
   }

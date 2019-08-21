@@ -18,7 +18,7 @@ export class HolidayDetailsEditComponent implements OnInit {
   holidayId: number;
 
   constructor(private holidayService: HolidayService, private route: ActivatedRoute, private router: Router) {
-    this.listOfHolidays = this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays = this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays = this.getListOfUniqueCountriesForHolidays();
   }
 
@@ -28,9 +28,15 @@ export class HolidayDetailsEditComponent implements OnInit {
         (params: Params)=>{
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
-          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
+          // this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
+          this.holiday= this.listOfHolidays[this.holidayId-1];
         }
       );
+
+    this.holidayService.listOfHolidaysChanged.subscribe((data)=>{
+        this.listOfHolidays=data;
+      }
+    );
   }
 
   updateHoliday() {
@@ -40,10 +46,13 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;
+
+    this.listOfHolidays[this.holidayId-1]=this.holiday;
+    this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // console.log(this.holiday);
+    console.log(this.listOfHolidays);
     // this.holidayUpdateForm.reset();
     this.router.navigate(["holidayDetails/"+this.holidayId]);
-
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[] {

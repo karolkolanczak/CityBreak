@@ -20,7 +20,7 @@ export class HolidayDetailsComponent implements OnInit {
   text;
 
   constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router) {
-    this.listOfHolidays= this.holidayService.convertData(this.route.snapshot.data['holidaysList']);
+    this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class HolidayDetailsComponent implements OnInit {
         (params: Params)=>{
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
-          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
+          this.holiday= this.listOfHolidays[this.holidayId-1];
         }
       );
   }
@@ -63,6 +63,9 @@ export class HolidayDetailsComponent implements OnInit {
 
   deleteHoliday(){
     console.log("Button: delete");
+    // this.listOfHolidays.splice(this.holidayId-1,1);
+    // console.log(this.listOfHolidays);
+    this.router.navigate(['cities/'+this.holiday.country]);
   }
 
 }

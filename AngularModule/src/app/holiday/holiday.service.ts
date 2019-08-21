@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 import {forkJoin, of, interval, from} from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { map, concatAll } from 'rxjs/operators';
 import { mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -12,13 +13,9 @@ import {Holiday} from './holiday.model';
 export class HolidayService {
 
   private url: string;
-
   citySelected = new EventEmitter<Holiday>();
   countrySelected = new EventEmitter<Holiday>();
-  listOfHolidaysChanged= new EventEmitter<Holiday[]>();
-
-  text=new EventEmitter<string>();
-
+  listOfHolidaysChanged= new Subject<Holiday[]>();
 
   constructor(private http: HttpClient){
     this.url = 'http://localhost:8080/api/';
@@ -70,15 +67,13 @@ export class HolidayService {
     return tempListOfHolidays;
   };
 
-  setListOfAllfHolidays(listOfAllHolidays :Holiday []){
-    // console.log("3: data: ");
-    // console.log(listOfAllHolidays);
-    this.listOfHolidaysChanged.emit(listOfAllHolidays)
+  setListOfAllfHolidays( listOfAllHolidays: Holiday[]){
+    // console.log("UPDATED LIST");
+    // console.log(listOfAllHolidays)
+    this.listOfHolidaysChanged.next(listOfAllHolidays);
   }
 
-
-
-  convertData(data): Holiday[]{
+  convertDataFromAPI(data): Holiday[]{
     let listOfHolidays: Holiday[]=[];
     for(let value of data){
       let holidayTemp: Holiday={} as Holiday;
@@ -98,13 +93,36 @@ export class HolidayService {
     return listOfHolidays;
   }
 
-  getHolidayById(holidayId: number, listOfHolidays: Holiday[]): Holiday {
-    let tempHoliday: Holiday = {} as Holiday;
-    for (let value of listOfHolidays) {
-      if (value.id == holidayId) {
-        tempHoliday=value;
-      }
-    }
-    return tempHoliday;
+  convertDataToAPI(holiday:Holiday){
+    console.log("HolidayId: "+holiday.id);
+    let dataToApi: any;
+    dataToApi={
+      id:holiday.id,
+      city: holiday.city,
+      country: holiday.country,
+      // "capital": "no",
+      holidayDetails: {
+        // "id": 1,
+        description: holiday.description,
+        priceForAdult: holiday.priceForAdult,
+        priceForChild: holiday.priceForChild
+      },
+      "image":null
+    };
+    return dataToApi;
   }
+
+  addHolidayToDatabase(holiday:Holiday){
+    console.log("Posting");
+    console.log(holiday);
+
+    let tempHoliday=this.convertDataToAPI(holiday);
+
+    this.http.post(this.url+'addHoliday',tempHoliday)
+      .subscribe(data=>{
+        console.log("Response: ");
+        console.log(data);
+      })
+  }
+
 }

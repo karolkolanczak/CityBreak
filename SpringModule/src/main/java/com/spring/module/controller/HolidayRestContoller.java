@@ -36,11 +36,26 @@ public class HolidayRestContoller {
 
         for(Holiday value: listOfHolidays){
 //            convertFromMultipartFileToByteFormatFile(value.getImage());
-            convertByteArrayToBufferedImage(value.getImage());
+            if(value.getImage() !=null){
+                convertByteArrayToBufferedImage(value.getImage());
+            }
+
         }
 
         return listOfHolidays;
     }
+
+    @PostMapping("/addHoliday")
+    public Holiday addHoliday(@RequestBody Holiday holiday){
+        // below in order to create new id
+        holiday.setId(0);
+        holidayService.saveHoliday(holiday);
+        return holiday;
+    }
+
+
+
+
 
     // convert byte array back to BufferedImage
     void convertByteArrayToBufferedImage(Byte[] byteImageObject) throws IOException {
