@@ -28,8 +28,7 @@ export class HolidayDetailsEditComponent implements OnInit {
         (params: Params)=>{
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
-          // this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
-          this.holiday= this.listOfHolidays[this.holidayId-1];
+          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
         }
       );
 

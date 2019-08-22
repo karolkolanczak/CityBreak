@@ -30,7 +30,8 @@ export class HolidayDetailsComponent implements OnInit {
         (params: Params)=>{
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
-          this.holiday= this.listOfHolidays[this.holidayId-1];
+          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
+          // this.holiday= this.listOfHolidays[this.holidayId-1];
         }
       );
   }
@@ -63,7 +64,6 @@ export class HolidayDetailsComponent implements OnInit {
 
   deleteHoliday(){
     console.log("Button: delete");
-    // this.listOfHolidays.splice(this.holidayId-1,1);
     // console.log(this.listOfHolidays);
     this.holidayService.deleteHoliday(this.holidayId);
     // this.router.navigate(['cities/'+this.holiday.country]);

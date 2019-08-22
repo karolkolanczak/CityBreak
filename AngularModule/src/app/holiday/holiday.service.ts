@@ -139,6 +139,16 @@ export class HolidayService {
       })
   }
 
+  getHolidayById(holidayId:number, listOfHolidays: Holiday []): Holiday{
+    let holidayTemp: Holiday={} as Holiday;
+    for(let value of listOfHolidays){
+      if(value.id==holidayId){
+        holidayTemp=value;
+      }
+    }
+    return holidayTemp;
+  }
+
   public requestDataFromMultipleSources(listOfHolidays:Holiday[]): Observable<any[]> {
     let tempListOfResponses = [];
     for( let value of listOfHolidays){
