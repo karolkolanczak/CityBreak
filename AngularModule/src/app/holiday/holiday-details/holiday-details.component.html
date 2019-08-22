@@ -49,18 +49,12 @@
       <form>
         <div class="form-group">
           <div class="row col-sm-4 control-label">
-            <button type="button" class="btn btn-primary" (click)="redirectToEditHoliday()">Edit</button>
+            <button type="button" class="btn btn-primary" (click)="redirectToEditHoliday()">Edit holiday</button>
           </div>
           <div class="row col-sm-4 control-label">
-            <button type="button" class="btn btn-danger" (click)="deleteHoliday()">Delete</button>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete holiday</button>
             <br><br>
-            <ng-template #template>
-              <div class="modal-body text-center">
-                <p>Do you want to confirm?</p>
-                <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
-                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
-              </div>
-            </ng-template>
           </div>
         </div>
       </form>
@@ -85,4 +79,28 @@
     </table>
   </div>
 
+</div>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Confirmation</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Delete this holiday: <strong> {{holiday.city}}</strong>?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteHoliday()">Delete</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
 </div>
