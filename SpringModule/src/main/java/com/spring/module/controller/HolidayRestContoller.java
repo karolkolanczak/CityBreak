@@ -27,12 +27,10 @@ public class HolidayRestContoller {
 
     @GetMapping("/holidays")
     public List<Holiday> getListOfHolidays() throws IOException {
-        List<Holiday> listOfHolidays=new ArrayList<>();
-        listOfHolidays=holidayService.getHolidays();
+        List<Holiday> listOfHolidays=holidayService.getHolidays();
         for(Holiday value: listOfHolidays){
-//            convertFromMultipartFileToByteFormatFile(value.getImage());
             if(value.getImage() !=null){
-                convertByteArrayToBufferedImage(value.getImage());
+                value.setImagePrimitveBytes(convertToByteOnly(value.getImage()));
             }
         }
         return listOfHolidays;

@@ -24,8 +24,7 @@ public class HolidayDAOImpl implements HolidayDAO {
     @Override
     public List<Holiday> getHolidays() {
         Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
-        List <Holiday> listOfHolidays=new ArrayList<>();
-        listOfHolidays = query.getResultList();
+        List <Holiday> listOfHolidays=query.getResultList();
         return listOfHolidays;
     }
 

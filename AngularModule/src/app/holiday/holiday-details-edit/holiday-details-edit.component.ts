@@ -29,12 +29,14 @@ export class HolidayDetailsEditComponent implements OnInit {
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
           this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
-        }
+        },
+        error=>{console.log(error.message)}
       );
 
     this.holidayService.listOfHolidaysChanged.subscribe((data)=>{
         this.listOfHolidays=data;
-      }
+      },
+      error=>{console.log(error.message)}
     );
   }
 

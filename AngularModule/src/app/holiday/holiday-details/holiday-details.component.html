@@ -72,9 +72,9 @@
       <tbody>
         <tr>
           <td>
-            <!--<img [src]="holiday.imageToShow"-->
-                 <!--*ngIf="!isImageLoading; else noImageFound" width="400" height="400" class="center-block"/>-->
-            <!--<h5 style="text-align:center">Free pictures from: https://pixabay.com</h5>-->
+            <img [src]="holiday.image"
+                 *ngIf="!isImageLoading; else noImageFound" width="400" height="400" class="center-block"/>
+            <h5 style="text-align:center">Free pictures from: https://pixabay.com</h5>
           </td>
         </tr>
       </tbody>

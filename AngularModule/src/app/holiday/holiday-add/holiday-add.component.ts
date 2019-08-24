@@ -35,8 +35,8 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
 
-    this.listOfHolidays.push(this.holiday)
-    this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
+    // this.listOfHolidays.push(this.holiday)
+    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
 
     this.holidayService.addHolidayToDatabase(this.holiday);
 

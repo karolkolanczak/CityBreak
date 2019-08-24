@@ -27,6 +27,8 @@ public class Holiday {
     //    @Lob  (not working on production with postgresql, essential for mysql)
     @Lob
     private Byte[] image;
+    @Transient
+    private byte[] imagePrimitveBytes;
 
     private String imagePath;
 
@@ -87,5 +89,13 @@ public class Holiday {
 
     public void setCapital(String capital) {
         this.capital = capital;
+    }
+
+    public byte[] getImagePrimitveBytes() {
+        return imagePrimitveBytes;
+    }
+
+    public void setImagePrimitveBytes(byte[] imagePrimitveBytes) {
+        this.imagePrimitveBytes = imagePrimitveBytes;
     }
 }

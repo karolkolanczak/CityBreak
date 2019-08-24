@@ -42,11 +42,6 @@ export class HolidayService {
             }
           }
     }
-    // for (let value of listOfHolidays) {
-    //   if (value.capital === 'yes') {
-    //     tempListOfHolidays.push(value);
-    //   }
-    // }
     return tempListOfHolidays;
   }
 
@@ -73,22 +68,27 @@ export class HolidayService {
       let holidayTemp: Holiday={} as Holiday;
       let image: Blob=null;
       // console.log("IMAGE: "+value.id)
-      this.getImage(value.id).subscribe(data => {
-        image=data;
-        console.log("image")
-      });
+      // this.getImage(value.id).subscribe(data => {
+      //   image=data;
+      //   console.log("image")
+      // },
+      //   error=>{console.log(error.message);
+      //   });
       // console.log("IMAGE: ")
-      // console.log(image);
       // console.log( image instanceof Blob)
-      holidayTemp=new Holiday(value.id,value.city,value.country,value.capital,value.holidayDetails.id, value.holidayDetails.description,value.holidayDetails.priceForAdult,value.holidayDetails.priceForChild,value.image,image)
-      // console.log("OOOO: "+value.id +" | "+value.city+" | "+value.country);
+
+
+      let base64 =value.imagePrimitveBytes
+      let urlImage = 'data:image/jpeg;base64,' + base64;
+
+      holidayTemp=new Holiday(value.id,value.city,value.country,value.capital,value.holidayDetails.id, value.holidayDetails.description,value.holidayDetails.priceForAdult,value.holidayDetails.priceForChild,urlImage)
       listOfHolidays.push(holidayTemp)
     }
     return listOfHolidays;
   }
 
   convertDataToAPI(holiday:Holiday){
-    console.log("HolidayId: "+holiday.id);
+    // console.log("HolidayId: "+holiday.id);
     let dataToApi: any;
     dataToApi={
       id:holiday.id,
@@ -108,15 +108,16 @@ export class HolidayService {
 
   addHolidayToDatabase(holiday:Holiday){
     console.log("Posting");
-    console.log(holiday);
-
+    // console.log(holiday);
     let tempHoliday=this.convertDataToAPI(holiday);
 
     this.http.post(this.url+'addHoliday',tempHoliday)
       .subscribe(data=>{
         console.log("Add: response from Database: : ");
         console.log(data);
-      })
+      },
+        error=>{console.log(error.message);
+        })
   }
 
   updateHolidayInDatabase(holiday:Holiday){
@@ -124,9 +125,11 @@ export class HolidayService {
     let tempHoliday=this.convertDataToAPI(holiday);
     this.http.put(this.url+'updateHoliday',tempHoliday)
       .subscribe(data=>{
-        console.log("Update: response from Database:  ");
+        console.log("Update: response from Database: ");
         console.log(data);
-      })
+      },
+        error=>{console.log(error.message);
+        })
   }
 
   deleteHoliday(holidayId){
@@ -134,9 +137,11 @@ export class HolidayService {
 
     this.http.delete(this.url+'deleteHoliday/'+holidayId)
       .subscribe(data=>{
-        console.log("Delete: response from Database:  ");
+        console.log("Delete: response from Database: ");
         console.log(data);
-      })
+      },
+        error=>{console.log(error.message);
+        })
   }
 
   getHolidayById(holidayId:number, listOfHolidays: Holiday []): Holiday{

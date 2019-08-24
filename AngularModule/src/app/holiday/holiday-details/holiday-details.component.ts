@@ -32,7 +32,8 @@ export class HolidayDetailsComponent implements OnInit {
           this.holidayId=params['id'];
           this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
           // this.holiday= this.listOfHolidays[this.holidayId-1];
-        }
+        },
+        error=>{console.log(error.message)}
       );
   }
 

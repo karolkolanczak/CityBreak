@@ -8,9 +8,8 @@ export class Holiday{
   private _priceForAdult ;
   private _priceForChild ;
   private _image;
-private _imageToShow;
 
-  constructor(id: number,city: string, country: string, capital: string, holidayDetailsId, description: string, priceForAdult, priceForChild,image,imageToShow) {
+  constructor(id: number,city: string, country: string, capital: string, holidayDetailsId, description: string, priceForAdult, priceForChild,image) {
     this._id=id;
     this._city = city;
     this._country = country;
@@ -20,7 +19,6 @@ private _imageToShow;
     this._priceForAdult = priceForAdult;
     this._priceForChild = priceForChild;
     this._image=image;
-    this._imageToShow=imageToShow;
   }
 
 
@@ -96,11 +94,4 @@ private _imageToShow;
     this._image = value;
   }
 
-  get imageToShow() {
-    return this._imageToShow;
-  }
-
-  set imageToShow(value) {
-    this._imageToShow = value;
-  }
 }
