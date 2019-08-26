@@ -6,8 +6,7 @@
     <li>3</li>
   </ol>
 </div>&nbsp;
-<h2>Holiday details: {{holiday.city}}</h2>
-<br />
+<h2>Holiday details: {{holiday.city}}</h2><br/>
 
 <div class="row container-fluid">
 
@@ -73,7 +72,7 @@
         <tr>
           <td>
             <img [src]="holiday.image"
-                 *ngIf="!isImageLoading; else noImageFound" width="400" height="400" class="center-block"/>
+                 *ngIf="!isImageLoading; else noImageFound" width="100%" height="400" class="center-block"/>
             <h5 style="text-align:center">Free pictures from: https://pixabay.com</h5>
           </td>
         </tr>

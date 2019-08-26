@@ -15,8 +15,8 @@ export class HolidayComponent implements OnInit {
 
   selectedCity: Holiday;
   selectedCountry;
-  imageToShow: any;
-  isImageLoading: boolean;
+  // imageToShow: any;
+  // isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
 
   constructor(private router: Router, private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
@@ -45,30 +45,30 @@ export class HolidayComponent implements OnInit {
       );
   }
 
-  getImageFromService(holidayId: number) {
-    // console.log("HolidayID: "+holidayId);
-      this.isImageLoading = true;
-      this.holidayService.getImage(holidayId).subscribe(data => {
-        this.createImageFromBlob(data);
-        this.isImageLoading = false;
-      }, error => {
-        this.isImageLoading = false;
-        console.log(error);
-      });
-    }
-
-
-    createImageFromBlob(image: Blob) {
-      // console.log( image instanceof Blob)
-      let reader = new FileReader();
-      reader.addEventListener("load", () => {
-         this.imageToShow = reader.result;
-      }, false);
-
-      if (image) {
-        reader.readAsDataURL(image);
-      }
-    }
+  // getImageFromService(holidayId: number) {
+  //   // console.log("HolidayID: "+holidayId);
+  //     this.isImageLoading = true;
+  //     this.holidayService.getImage(holidayId).subscribe(data => {
+  //       this.createImageFromBlob(data);
+  //       this.isImageLoading = false;
+  //     }, error => {
+  //       this.isImageLoading = false;
+  //       console.log(error);
+  //     });
+  //   }
+  //
+  //
+  //   createImageFromBlob(image: Blob) {
+  //     // console.log( image instanceof Blob)
+  //     let reader = new FileReader();
+  //     reader.addEventListener("load", () => {
+  //        this.imageToShow = reader.result;
+  //     }, false);
+  //
+  //     if (image) {
+  //       reader.readAsDataURL(image);
+  //     }
+  //   }
 
     addCountry(){
       let tempHoliday: Holiday = {} as Holiday;

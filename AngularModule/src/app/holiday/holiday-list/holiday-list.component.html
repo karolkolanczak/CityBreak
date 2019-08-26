@@ -5,13 +5,13 @@
     <li><a href="#" style="color:black">2</a></li>
     <li>3</li>
   </ol>
-</div><h4>&nbsp;</h4>
+</div>&nbsp;
 
-<h4>List of Holidays:</h4>
-
+<h2>List of Holidays:</h2><br/>
+<div class="row container-fluid">
 <div class="list-group">
       <app-holiday-item *ngFor="let value of getListOfUniqueCountriesForHolidays()" [holiday]="value" ></app-holiday-item>
 </div>
 
-<div class="row"></div>
+</div>
 

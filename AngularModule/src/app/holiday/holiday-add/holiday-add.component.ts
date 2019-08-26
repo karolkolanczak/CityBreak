@@ -16,6 +16,10 @@ export class HolidayAddComponent implements OnInit {
   listOfHolidays: Holiday[]=[];
   listOfUniqueCountriesForHolidays: Holiday[]=[];
 
+  public imagePath;
+  imgURL: any;
+  public notImageMessage: string;
+
   constructor(private holidayService: HolidayService,private route: ActivatedRoute) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
@@ -41,6 +45,32 @@ export class HolidayAddComponent implements OnInit {
     this.holidayService.addHolidayToDatabase(this.holiday);
 
     // this.addHolidayForm.reset();
+  }
+
+  uploadFile(event){
+    this.notImageMessage=null;
+    console.log("UPLOAD");
+    console.log(event.target.files[0])
+    let file=event.target.files[0];
+    this.imagePreview(file);
+  }
+
+  imagePreview(file){
+    if (file.length === 0)
+      return;
+
+    var mimeType = file.type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.notImageMessage = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = file;
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[]{
