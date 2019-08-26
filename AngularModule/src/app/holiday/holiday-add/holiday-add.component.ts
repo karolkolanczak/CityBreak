@@ -38,13 +38,13 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.priceForAdult=this.addHolidayForm.value.priceForAdult;
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
-
-    // this.listOfHolidays.push(this.holiday)
-    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
+    this.holiday.image=this.imgURL;
 
     this.holidayService.addHolidayToDatabase(this.holiday);
-
+    // this.listOfHolidays.push(this.holiday)
+    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // this.addHolidayForm.reset();
+    // this.router.navigate(["holidays"]);
   }
 
   uploadImageFile(event){

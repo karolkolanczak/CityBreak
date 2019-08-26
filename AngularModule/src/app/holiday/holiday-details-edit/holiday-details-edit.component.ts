@@ -30,7 +30,6 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params)=>{
-          // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
           this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
           this.tempHolidayImage=this.holiday.image;
@@ -54,12 +53,14 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;
-    this.holiday.image=this.updateHolidayForm.value.image;
+    this.holiday.image=this.imgURL;
 
-    this.listOfHolidays[this.holidayId-1]=this.holiday;
-    this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
-    // console.log(this.holiday);
+    this.holidayService.updateHolidayInDatabase(this.holiday)
     console.log(this.listOfHolidays);
+
+    // this.listOfHolidays[this.holidayId-1]=this.holiday;
+    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
+    // console.log(this.holiday);
     // this.holidayUpdateForm.reset();
     // this.router.navigate(["holidayDetails/"+this.holidayId]);
   }

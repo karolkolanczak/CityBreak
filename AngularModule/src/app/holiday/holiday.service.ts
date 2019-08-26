@@ -66,17 +66,9 @@ export class HolidayService {
     let listOfHolidays: Holiday[]=[];
     for(let value of data){
       let holidayTemp: Holiday={} as Holiday;
-      // let image: Blob=null;
-      // console.log("IMAGE: "+value.id)
-      // this.getImage(value.id).subscribe(data => {
-      //   image=data;
-      //   console.log("image")
-      // },
-      //   error=>{console.log(error.message);
-      //   });
+
       // console.log("IMAGE: ")
       // console.log( image instanceof Blob)
-
 
       let base64 =value.imagePrimitveBytes
       let urlImage = 'data:image/jpeg;base64,' + base64;
@@ -88,7 +80,13 @@ export class HolidayService {
   }
 
   convertDataToAPI(holiday:Holiday){
-    // console.log("HolidayId: "+holiday.id);
+    console.log("HolidayId: "+holiday.id);
+
+    // Base64 url of image trimmed one without data:image/png;base64
+    // base64="/9j/4AAQSkZJRgABAQE...";
+    let imgURL =holiday.image;
+    var base64 = imgURL.split(';base64,').pop();
+
     let dataToApi: any;
     dataToApi={
       id:holiday.id,
@@ -101,7 +99,7 @@ export class HolidayService {
         priceForAdult: holiday.priceForAdult,
         priceForChild: holiday.priceForChild
       },
-      "image":null
+      image:base64
     };
     return dataToApi;
   }
@@ -123,6 +121,7 @@ export class HolidayService {
   updateHolidayInDatabase(holiday:Holiday){
     console.log("Posting");
     let tempHoliday=this.convertDataToAPI(holiday);
+
     this.http.put(this.url+'updateHoliday',tempHoliday)
       .subscribe(data=>{
         console.log("Update: response from Database: ");
