@@ -16,6 +16,10 @@ export class HolidayDetailsEditComponent implements OnInit {
   listOfHolidays: Holiday[] = [];
   listOfUniqueCountriesForHolidays: Holiday[] = [];
   holidayId: number;
+  public imagePath;
+  imgURL: any;
+  public notImageMessage: string;
+  tempHolidayImage;
 
   constructor(private holidayService: HolidayService, private route: ActivatedRoute, private router: Router) {
     this.listOfHolidays = this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
@@ -29,6 +33,9 @@ export class HolidayDetailsEditComponent implements OnInit {
           // this.imageToShow=this.getImageFromService(params['id']);
           this.holidayId=params['id'];
           this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
+          this.tempHolidayImage=this.holiday.image;
+          console.log("Edited image");
+          // console.log(this.holiday.image);
         },
         error=>{console.log(error.message)}
       );
@@ -47,12 +54,12 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;
+    this.holiday.image=this.updateHolidayForm.value.image;
 
     this.listOfHolidays[this.holidayId-1]=this.holiday;
     this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // console.log(this.holiday);
     console.log(this.listOfHolidays);
-    this.holidayService.updateHolidayInDatabase(this.holiday)
     // this.holidayUpdateForm.reset();
     // this.router.navigate(["holidayDetails/"+this.holidayId]);
   }
@@ -61,4 +68,31 @@ export class HolidayDetailsEditComponent implements OnInit {
     return this.holidayService.getListOfUniqueCountriesForHolidays(this.listOfHolidays);
   }
 
+  uploadImageFile(event){
+    this.notImageMessage=null;
+    this.imgURL=null;
+    this.tempHolidayImage=null
+    console.log("UPLOAD");
+    console.log(event.target.files[0])
+    let file=event.target.files[0];
+    this.imagePreview(file);
+  }
+
+  imagePreview(file){
+    if (file.length === 0)
+      return;
+
+    var mimeType = file.type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.notImageMessage = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = file;
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
+  }
 }

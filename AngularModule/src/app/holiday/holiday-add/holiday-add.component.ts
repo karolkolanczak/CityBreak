@@ -47,8 +47,9 @@ export class HolidayAddComponent implements OnInit {
     // this.addHolidayForm.reset();
   }
 
-  uploadFile(event){
+  uploadImageFile(event){
     this.notImageMessage=null;
+    this.imgURL=null;
     console.log("UPLOAD");
     console.log(event.target.files[0])
     let file=event.target.files[0];

@@ -1,60 +1,80 @@
+<div>
+  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2">
+    <li><a href="#"  style="color:black">Home</a></li>
+    <li><a href="#" style="color:black">1</a></li>
+    <li><a href="#" style="color:black">2</a></li>
+    <li>3</li>
+  </ol>
+</div>&nbsp;
 <h2>Edit Holiday: {{holiday.city}}</h2><br/>
 
-<div class="container">
-  <form class="form-horizontal" (ngSubmit)="updateHoliday()" #holidayUpdateForm="ngForm">
-    <div class="form-group">
-      <label class="col-sm-2 control-label" >City</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" [(ngModel)]="holiday.city" name="city" required #cityInput="ngModel">
-      </div>
-      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
-    </div>
+<div class="row container-fluid">
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Country:</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" [(ngModel)]="holiday.country" name="country" required #countryInput="ngModel">
-      </div>
-      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!countryInput.valid && countryInput.touched">Please enter a country.</div>
-    </div>
+  <div class="col-md-6" style='padding-right: 0px;padding-left: 0px;'>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label" >Price for adult:</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" [(ngModel)]="holiday.priceForAdult" name="priceForAdult" required #priceForAdultInput="ngModel">
+    <form class="form-horizontal" (ngSubmit)="updateHoliday()" #holidayUpdateForm="ngForm">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" >City:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="holiday.city" name="city" required #cityInput="ngModel">
+        </div>
+        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
       </div>
-      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForAdultInput.valid && priceForAdultInput.touched">Please enter a price for adult.</div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label" >Price for child:</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" [(ngModel)]="holiday.priceForChild" name="priceForChild" required #priceForChildInput="ngModel">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Country:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="holiday.country" name="country" required #countryInput="ngModel">
+        </div>
+        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!countryInput.valid && countryInput.touched">Please enter a country.</div>
       </div>
-      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForChildInput.valid && priceForChildInput.touched">Please enter a price for child.</div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Description:</label>
-      <div class="col-sm-5">
-        <textarea class="form-control"  rows="3" [(ngModel)]="holiday.description" name="description" required #descriptionInput="ngModel"></textarea>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" >Adult price:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="holiday.priceForAdult" name="priceForAdult" required #priceForAdultInput="ngModel">
+        </div>
+        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForAdultInput.valid && priceForAdultInput.touched">Please enter a price for adult.</div>
       </div>
-      <div class="col-sm-3 control-label alertInfoClass" *ngIf="!descriptionInput.valid && descriptionInput.touched">Please enter a description.</div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Image:</label>
-      <div class="col-sm-5">
-        <input type="file" class="file" ngModel="" name="image"  #imageInput/>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" >Child price:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" [(ngModel)]="holiday.priceForChild" name="priceForChild" required #priceForChildInput="ngModel">
+        </div>
+        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForChildInput.valid && priceForChildInput.touched">Please enter a price for child.</div>
       </div>
-      <!--<div class="col-sm-3 control-label alertInfoClass" *ngIf="!imageInput.valid && imageInput.touched">Please choose a image from disk.</div>-->
-    </div>
 
-    <div class="form-group">
-      <div class="row col-sm-3 control-label" style="margin-bottom: 100px">
-        <button type="submit" class="btn btn-primary" [disabled]="!holidayUpdateForm.valid">Save</button>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Description:</label>
+        <div class="col-sm-6">
+          <textarea class="form-control"  rows="3" [(ngModel)]="holiday.description" name="description" required #descriptionInput="ngModel"></textarea>
+        </div>
+        <div class="col-sm-4 control-label alertInfoClass" *ngIf="!descriptionInput.valid && descriptionInput.touched">Please enter a description.</div>
       </div>
-    </div>
 
-  </form>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Image:</label>
+        <div class="col-sm-3">
+          <input type="file" class="file" ngModel="" name="image"  #imageInput  (change)="uploadImageFile($event)"/>
+        </div>
+        <div class="col-sm-8 control-label alertInfoClass" *ngIf="notImageMessage">{{notImageMessage}}</div>
+      </div><br/><br/>
+
+      <div class="form-group">
+        <div class="row col-sm-3 control-label" style="margin-bottom: 100px">
+          <button type="submit" class="btn btn-primary" [disabled]="!holidayUpdateForm.valid">Save</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="col-md-6" style='padding-right: 0px; padding-left: 0px;'>
+    <div>
+      <img [src]="imgURL" *ngIf="imgURL" width="100%" height="400" class="center-block"/>
+      <img [src]="holiday.image" *ngIf="tempHolidayImage" width="100%" height="400" class="center-block"/>
+    </div>
+  </div>
+
 </div>

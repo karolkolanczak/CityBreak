@@ -66,7 +66,7 @@ export class HolidayService {
     let listOfHolidays: Holiday[]=[];
     for(let value of data){
       let holidayTemp: Holiday={} as Holiday;
-      let image: Blob=null;
+      // let image: Blob=null;
       // console.log("IMAGE: "+value.id)
       // this.getImage(value.id).subscribe(data => {
       //   image=data;
@@ -166,6 +166,10 @@ export class HolidayService {
     // return forkJoin([response1, response2, response3]);
     return forkJoin(tempListOfResponses);
   }
+
+
+
+
 
   // getData(){
   //   return this.http.get(this.url+'holidays')
