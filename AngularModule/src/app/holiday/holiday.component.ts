@@ -19,7 +19,7 @@ export class HolidayComponent implements OnInit {
   // isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
 
-  constructor(private router: Router, private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
+  constructor( private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
     this.listOfHolidays=this.route.snapshot.data['holidaysList'];
   }
 
@@ -44,41 +44,4 @@ export class HolidayComponent implements OnInit {
         }
       );
   }
-
-  // getImageFromService(holidayId: number) {
-  //   // console.log("HolidayID: "+holidayId);
-  //     this.isImageLoading = true;
-  //     this.holidayService.getImage(holidayId).subscribe(data => {
-  //       this.createImageFromBlob(data);
-  //       this.isImageLoading = false;
-  //     }, error => {
-  //       this.isImageLoading = false;
-  //       console.log(error);
-  //     });
-  //   }
-  //
-  //
-  //   createImageFromBlob(image: Blob) {
-  //     // console.log( image instanceof Blob)
-  //     let reader = new FileReader();
-  //     reader.addEventListener("load", () => {
-  //        this.imageToShow = reader.result;
-  //     }, false);
-  //
-  //     if (image) {
-  //       reader.readAsDataURL(image);
-  //     }
-  //   }
-
-    addCountry(){
-      let tempHoliday: Holiday = {} as Holiday;
-      tempHoliday=new Holiday(10,'gdynia',"Poland",'yes',100,'ladnie bardzo ladnie',100,80,null);
-      this.listOfHolidays.push(tempHoliday);
-      this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
-    }
-
-  redirectToAddHoliday(){
-    this.router.navigate(['/holiday/add']);
-  }
-
 }

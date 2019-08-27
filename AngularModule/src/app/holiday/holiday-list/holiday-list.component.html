@@ -11,6 +11,19 @@
 <div class="row container-fluid">
 <div class="list-group">
       <app-holiday-item *ngFor="let value of getListOfUniqueCountriesForHolidays()" [holiday]="value" ></app-holiday-item>
+
+  <a class="list-group-item col-md-4" style="cursor: pointer" (click)="redirectToAddHoliday()" >
+    <div class="col-md-12" style="color: black">
+      <div>Add holiday</div><br />
+      <div style=" display: flex;align-items: center;justify-content: center;">
+        <button type="button" class="btn btn-default btn-lg" style=" height:200px;width:200px;background-color: Transparent;">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+        </button>
+      </div>
+
+    </div>
+  </a>
+
 </div>
 
 </div>
