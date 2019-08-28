@@ -22,7 +22,6 @@ export class HolidayListComponent implements OnInit {
 
   ngOnInit() {
 
-console.log("ONINIT");
     this.holidayService.listOfHolidaysChanged
       .subscribe(
         (listOfHolidays: Holiday[])=>{

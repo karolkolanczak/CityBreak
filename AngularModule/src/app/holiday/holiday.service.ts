@@ -36,7 +36,8 @@ export class HolidayService {
     let listOfUniqueCountries: string[] = [...new Set(listOfHolidays.map(value => value.country))];
     for (let uniqueCountry of listOfUniqueCountries) {
           for(let value of listOfHolidays){
-            if(value.country===uniqueCountry){
+            // value.country!=='Add holiday' ==> in json init data it indicates "add new Holiday" data
+            if(value.country===uniqueCountry && value.country!=='Add holiday'){
               tempListOfHolidays.push(value);
               break;
             }

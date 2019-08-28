@@ -19,6 +19,7 @@ export class HolidayAddComponent implements OnInit {
   public imagePath;
   imgURL: any;
   public notImageMessage: string;
+  public exceedSizeLimitMessage: string;
 
   constructor(private holidayService: HolidayService,private route: ActivatedRoute) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
@@ -59,6 +60,7 @@ export class HolidayAddComponent implements OnInit {
   imagePreview(file){
     if (file.length === 0)
       return;
+
 
     var mimeType = file.type;
     if (mimeType.match(/image\/*/) == null) {

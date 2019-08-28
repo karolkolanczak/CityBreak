@@ -95,5 +95,29 @@
       "priceForChild": 35,
       "description": "Toledo is a city and municipality located in central Spain; it is the capital of the province of Toledo and the autonomous community of Castile–La Mancha."
     }
+  },
+  {
+    "id": 9,
+    "city": "Thessaloniki",
+    "country": "Greece",
+    "capital":"no",
+    "imagePath": "images/thessaloniki.jpg",
+    "holidayDetails": {
+      "priceForAdult": 90,
+      "priceForChild": 60,
+      "description": "Thessaloniki also known as Saloniki or Salonica, is the second-largest city in Greece, with over 1 million inhabitants in its metropolitan area, and the capital of Greek Macedonia, the administrative region of Central Macedonia."
+    }
+  },
+  {
+    "id": 10,
+    "city": "Add holiday",
+    "country": "Add holiday",
+    "capital":"no",
+    "imagePath": "images/addHoliday.png",
+    "holidayDetails": {
+      "priceForAdult": 0,
+      "priceForChild": 0,
+      "description": "Add holiday"
+    }
   }
 ]
