@@ -50,8 +50,9 @@ export class HolidayAddComponent implements OnInit {
 
   uploadImageFile(event){
     this.notImageMessage=null;
+    this.exceedSizeLimitMessage=null;
     this.imgURL=null;
-    console.log("UPLOAD");
+    this.addHolidayForm.form.controls['image'].setErrors( null);
     console.log(event.target.files[0])
     let file=event.target.files[0];
     this.imagePreview(file);
@@ -61,10 +62,23 @@ export class HolidayAddComponent implements OnInit {
     if (file.length === 0)
       return;
 
+    let imgSizeBajt=file.size;
+    let imgSizeKiloBajt=imgSizeBajt/1024;
+    let imgSizeMegaBajt=imgSizeKiloBajt/1024
+    console.log("imgSizeBajt: "+imgSizeBajt);
+    console.log("imgSizeKiloBajt: "+imgSizeKiloBajt);
+    console.log("imgSizeMegaBajt: "+imgSizeMegaBajt);
+
+    if(imgSizeMegaBajt>=3.9){
+      this.exceedSizeLimitMessage="Max size of image is: 3.9 MB | yours is: "+(Math.round(imgSizeMegaBajt * 100) / 100)+" MB"
+      this.addHolidayForm.form.controls['image'].setErrors({'incorrect': true});
+    }
+
 
     var mimeType = file.type;
     if (mimeType.match(/image\/*/) == null) {
       this.notImageMessage = "Only images are supported.";
+      this.addHolidayForm.form.controls['image'].setErrors({'incorrect': true});
       return;
     }
 

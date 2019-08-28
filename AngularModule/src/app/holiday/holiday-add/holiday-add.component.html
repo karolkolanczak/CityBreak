@@ -19,7 +19,7 @@
           <div class="col-sm-3">
             <input type="text" class="form-control" ngModel="Warsaw" name="city" required #cityInput="ngModel">
           </div>
-          <div class="col-sm-3 control-label alertInfoClass" id="" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
+          <div class="col-sm-5 control-label alertInfoClass" id="" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
         </div>
 
         <div class="form-group">
@@ -60,9 +60,10 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Image:</label>
           <div class="col-sm-3">
-            <input type="file" class="file" ngModel="" name="image"  #imageInput  (change)="uploadImageFile($event)"/>
+            <input type="file" class="file" ngModel="" name="image"   #imageInput  (change)="uploadImageFile($event)"/>
           </div>
           <div class="col-sm-8 control-label alertInfoClass" *ngIf="notImageMessage">{{notImageMessage}}</div>
+          <div class="col-sm-8 control-label alertInfoClass"  *ngIf="exceedSizeLimitMessage && !notImageMessage">{{exceedSizeLimitMessage}}</div>
         </div><br/><br/>
 
         <div class="form-group">

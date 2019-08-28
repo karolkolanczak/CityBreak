@@ -18,7 +18,7 @@
         <div class="col-sm-3">
           <input type="text" class="form-control" [(ngModel)]="holiday.city" name="city" required #cityInput="ngModel">
         </div>
-        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
+        <div class="col-sm-5 control-label alertInfoClass" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
       </div>
 
       <div class="form-group">
@@ -26,7 +26,7 @@
         <div class="col-sm-3">
           <input type="text" class="form-control" [(ngModel)]="holiday.country" name="country" required #countryInput="ngModel">
         </div>
-        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!countryInput.valid && countryInput.touched">Please enter a country.</div>
+        <div class="col-sm-5 control-label alertInfoClass" *ngIf="!countryInput.valid && countryInput.touched">Please enter a country.</div>
       </div>
 
       <div class="form-group">
@@ -34,7 +34,7 @@
         <div class="col-sm-3">
           <input type="text" class="form-control" [(ngModel)]="holiday.priceForAdult" name="priceForAdult" required #priceForAdultInput="ngModel">
         </div>
-        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForAdultInput.valid && priceForAdultInput.touched">Please enter a price for adult.</div>
+        <div class="col-sm-5 control-label alertInfoClass" *ngIf="!priceForAdultInput.valid && priceForAdultInput.touched">Please enter a price for adult.</div>
       </div>
 
       <div class="form-group">
@@ -42,7 +42,7 @@
         <div class="col-sm-3">
           <input type="text" class="form-control" [(ngModel)]="holiday.priceForChild" name="priceForChild" required #priceForChildInput="ngModel">
         </div>
-        <div class="col-sm-3 control-label alertInfoClass" *ngIf="!priceForChildInput.valid && priceForChildInput.touched">Please enter a price for child.</div>
+        <div class="col-sm-5 control-label alertInfoClass" *ngIf="!priceForChildInput.valid && priceForChildInput.touched">Please enter a price for child.</div>
       </div>
 
       <div class="form-group">
@@ -59,6 +59,7 @@
           <input type="file" class="file" ngModel="" name="image"  #imageInput  (change)="uploadImageFile($event)"/>
         </div>
         <div class="col-sm-8 control-label alertInfoClass" *ngIf="notImageMessage">{{notImageMessage}}</div>
+        <div class="col-sm-8 control-label alertInfoClass"  *ngIf="exceedSizeLimitMessage && !notImageMessage">{{exceedSizeLimitMessage}}</div>
       </div><br/><br/>
 
       <div class="form-group">
