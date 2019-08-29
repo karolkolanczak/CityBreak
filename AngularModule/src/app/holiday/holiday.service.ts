@@ -17,7 +17,8 @@ export class HolidayService {
   citySelected = new EventEmitter<Holiday>();
   countrySelected = new EventEmitter<Holiday>();
   listOfHolidaysChanged= new Subject<Holiday[]>();
-  deletionCompleteOfHoliday=new Subject<Holiday>();
+  deletionOfHolidayCompleted=new Subject<Holiday>();
+  updateOfHolidayCompleted=new Subject<Holiday>();
 
   constructor(private http: HttpClient,private router:Router){
     this.url = 'http://localhost:8080/api/';
@@ -25,7 +26,6 @@ export class HolidayService {
 
   // http://localhost:8080/api/holidays
   getListOfHolidays(): Observable<any>{
-    console.log("Get All Holidays");
     return this.http.get(this.url+'holidays');
   }
 
@@ -35,7 +35,6 @@ export class HolidayService {
   }
 
   getListOfUniqueCountriesForHolidays(listOfHolidays: Holiday[]): Holiday[] {
-    console.log("getListOfUniqueCountriesForHolidays");
     let tempListOfHolidays: Holiday []= [];
     let listOfUniqueCountries: string[] = [...new Set(listOfHolidays.map(value => value.country))];
     for (let uniqueCountry of listOfUniqueCountries) {
@@ -51,7 +50,6 @@ export class HolidayService {
   }
 
   getListOfUniqueCitiesInSelectedCountry(listOfHolidays: Holiday[], country: string){
-    console.log("getListOfUniqueCitiesInSelectedCountry");
     let tempListOfHolidays=[];
     for( let value of listOfHolidays){
         if(value.country===country){
@@ -62,14 +60,7 @@ export class HolidayService {
     return tempListOfHolidays;
   };
 
-  setListOfAllfHolidays( listOfAllHolidays: Holiday[]){
-    // console.log("UPDATED LIST");
-    // console.log(listOfAllHolidays)
-    this.listOfHolidaysChanged.next(listOfAllHolidays);
-  }
-
   convertDataFromAPI(data): Holiday[]{
-    console.log("convertDataFromAPI");
     let listOfHolidays: Holiday[]=[];
     for(let value of data){
       let holidayTemp: Holiday={} as Holiday;
@@ -92,7 +83,6 @@ export class HolidayService {
   }
 
   convertDataToAPI(holiday:Holiday){
-    console.log("convertDataToAPI");
 
     // Base64 url of image trimmed one without data:image/png;base64
     // base64="/9j/4AAQSkZJRgABAQE...";
@@ -119,8 +109,7 @@ export class HolidayService {
   }
 
   addHolidayToDatabase(holiday:Holiday){
-    console.log("Posting");
-    // console.log(holiday);
+
     let tempHoliday=this.convertDataToAPI(holiday);
 
     this.http.post(this.url+'addHoliday',tempHoliday)
@@ -128,38 +117,40 @@ export class HolidayService {
         console.log("Add: response from Database: : ");
         console.log(data);
       },
-        error=>{console.log(error.message);
-        })
+      error=>{console.log(error.message);
+      })
   }
 
   updateHolidayInDatabase(holiday:Holiday){
-    console.log("Posting");
+
     let tempHoliday=this.convertDataToAPI(holiday);
 
     this.http.put(this.url+'updateHoliday',tempHoliday)
       .subscribe(data=>{
         console.log("Update: response from Database: ");
         console.log(data);
+        let tempHolidayFromDatabase=this.convertDataFromAPI([data])[0]
+        console.log("CONVERTED: ");
+        console.log(tempHolidayFromDatabase);
+          this.updateOfHolidayCompleted.next(tempHolidayFromDatabase);
       },
-        error=>{console.log(error.message);
-        })
+      error=>{console.log(error.message);
+      })
   }
 
   deleteHoliday(holiday: Holiday){
-    console.log("Delete: "+holiday.id) ;
 
     let tempHoliday: Holiday=holiday;
-
 
     this.http.delete(this.url+'deleteHoliday/'+holiday.id)
       .subscribe(data=>{
         console.log("Delete: response from Database: ");
         console.log(data);
-        this.deletionCompleteOfHoliday.next(tempHoliday);
+        this.deletionOfHolidayCompleted.next(tempHoliday);
       },
-        error=>{console.log(error.message);
-          this.deletionCompleteOfHoliday.next(tempHoliday);
-        })
+      error=>{console.log(error.message);
+        this.deletionOfHolidayCompleted.next(tempHoliday);
+      })
   }
 
   getHolidayById(holidayId:number, listOfHolidays: Holiday []): Holiday{
@@ -184,10 +175,6 @@ export class HolidayService {
     // return forkJoin([response1, response2, response3]);
     return forkJoin(tempListOfResponses);
   }
-
-
-
-
 
   // getData(){
   //   return this.http.get(this.url+'holidays')

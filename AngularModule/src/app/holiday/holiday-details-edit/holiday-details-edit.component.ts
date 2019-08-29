@@ -45,6 +45,11 @@ export class HolidayDetailsEditComponent implements OnInit {
       },
       error=>{console.log(error.message)}
     );
+
+    this.holidayService.updateOfHolidayCompleted
+      .subscribe((data)=>{
+        this.router.navigate(["holidayDetails/"+data.id]);
+    })
   }
 
   updateHoliday() {
@@ -57,13 +62,9 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.image=this.imgURL;
 
     this.holidayService.updateHolidayInDatabase(this.holiday)
-    console.log(this.listOfHolidays);
 
-    // this.listOfHolidays[this.holidayId-1]=this.holiday;
-    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
-    // console.log(this.holiday);
+    // this.router.navigate(["holidayDetails/"+this.holidayId]);
     // this.holidayUpdateForm.reset();
-    this.router.navigate(["holidayDetails/"+this.holidayId]);
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[] {
@@ -76,7 +77,6 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.imgURL=null;
     this.tempHolidayImage=null;
     this.updateHolidayForm.form.controls['image'].setErrors( null);
-    console.log(event.target.files[0])
     let file=event.target.files[0];
     this.imagePreview(file);
   }

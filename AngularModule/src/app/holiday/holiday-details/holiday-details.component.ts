@@ -33,13 +33,14 @@ export class HolidayDetailsComponent implements OnInit {
         }
       );
 
-    this.holidayService.deletionCompleteOfHoliday
+    this.holidayService.deletionOfHolidayCompleted
       .subscribe((tempHoliday) => {
         this.holidayService.getListOfHolidays().subscribe((data) => {
             this.refreschedListOfHolidays = data;
             this.navigationAfterDelete(tempHoliday);
           })}
       );
+
 
   }
 
