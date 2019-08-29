@@ -81,12 +81,15 @@ export class HolidayService {
   }
 
   convertDataToAPI(holiday:Holiday){
-    console.log("HolidayId: "+holiday.id);
+    // console.log(holiday);
 
     // Base64 url of image trimmed one without data:image/png;base64
     // base64="/9j/4AAQSkZJRgABAQE...";
-    let imgURL =holiday.image;
-    var base64 = imgURL.split(';base64,').pop();
+    if(holiday.image !=undefined){
+      let imgURL =holiday.image;
+      var base64 = imgURL.split(';base64,').pop();
+    }
+
 
     let dataToApi: any;
     dataToApi={
