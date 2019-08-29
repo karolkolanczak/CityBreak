@@ -59,7 +59,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Image:</label>
           <div class="col-sm-3">
-            <input type="file" class="file" ngModel="" name="image"   #imageInput  (change)="uploadImageFile($event)"/>
+            <input type="file" class="file" ngModel="" name="image"   #imageInput  (change)="uploadImageFile($event)" required/>
           </div>
           <div class="col-sm-8 control-label alertInfoClass" *ngIf="notImageMessage">{{notImageMessage}}</div>
           <div class="col-sm-8 control-label alertInfoClass"  *ngIf="exceedSizeLimitMessage && !notImageMessage">{{exceedSizeLimitMessage}}</div>

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HolidayService} from '../holiday.service';
 import {NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Holiday} from '../holiday.model';
 
 @Component({
@@ -21,7 +21,7 @@ export class HolidayAddComponent implements OnInit {
   public notImageMessage: string;
   public exceedSizeLimitMessage: string;
 
-  constructor(private holidayService: HolidayService,private route: ActivatedRoute) {
+  constructor(private holidayService: HolidayService,private route: ActivatedRoute, private router:Router) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
 }
@@ -45,7 +45,7 @@ export class HolidayAddComponent implements OnInit {
     // this.listOfHolidays.push(this.holiday)
     // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // this.addHolidayForm.reset();
-    // this.router.navigate(["holidays"]);
+    this.router.navigate(["cities/"+this.holiday.country]);
   }
 
   uploadImageFile(event){
