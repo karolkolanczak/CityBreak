@@ -53,7 +53,7 @@ public class HolidayRestContoller {
     @DeleteMapping("/deleteHoliday/{holidayId}")
     public String deleteHoliday(@PathVariable int holidayId) {
         holidayService.deleteHoliday(holidayId);
-        return "Deleted holiday with Id: "+holidayId;
+        return "Spring message: Deleted holiday with Id: "+holidayId;
     }
 
     @GetMapping(value = "/image/{holidayId}",produces = MediaType.IMAGE_JPEG_VALUE)

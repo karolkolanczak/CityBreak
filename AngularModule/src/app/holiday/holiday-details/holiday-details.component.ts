@@ -1,7 +1,7 @@
 import {Component, Directive, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {HolidayService} from '../holiday.service';
 import {Holiday} from '../holiday.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params,Router} from '@angular/router';
 
 @Component({
   selector: 'app-holiday-details',
@@ -12,50 +12,35 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 export class HolidayDetailsComponent implements OnInit {
   holiday: Holiday;
-  // @Input() holiday: Holiday;
-  imageToShow: any;
-  isImageLoading: boolean;
-  listOfHolidays: Holiday[]=[];
+  initListOfHolidays: Holiday[]=[];
+  refreschedListOfHolidays: Holiday[]=[];
   holidayId: number;
-  text;
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router) {
-    this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router ) {
+    this.initListOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
   ngOnInit() {
 
     this.route.params
       .subscribe(
-        (params: Params)=>{
-          // this.imageToShow=this.getImageFromService(params['id']);
-          this.holidayId=params['id'];
-          this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
-          // this.holiday= this.listOfHolidays[this.holidayId-1];
+        (params: Params) => {
+          this.holidayId = params['id'];
+          this.holiday = this.holidayService.getHolidayById(this.holidayId, this.initListOfHolidays);
         },
-        error=>{console.log(error.message)}
+        error => {
+          console.log(error.message)
+        }
       );
-  }
 
-  getImageFromService(holidayId:number) {
-    this.isImageLoading = true;
-    this.holidayService.getImage(holidayId).subscribe(data => {
-      this.createImageFromBlob(data);
-      this.isImageLoading = false;
-    }, error => {
-      this.isImageLoading = false;
-      console.log(error);
-    });
-  }
+    this.holidayService.deletionCompleteOfHoliday
+      .subscribe((tempHoliday) => {
+        this.holidayService.getListOfHolidays().subscribe((data) => {
+            this.refreschedListOfHolidays = data;
+            this.navigationAfterDelete(tempHoliday);
+          })}
+      );
 
-  createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.imageToShow = reader.result;
-    }, false);
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 
   redirectToEditHoliday(){
@@ -66,8 +51,29 @@ export class HolidayDetailsComponent implements OnInit {
   deleteHoliday(){
     console.log("Button: delete");
     // console.log(this.listOfHolidays);
-    this.holidayService.deleteHoliday(this.holidayId);
-    // this.router.navigate(['cities/'+this.holiday.country]);
+    this.holidayService.deleteHoliday(this.holiday)
+  }
+
+  navigationAfterDelete(tempHoliday: Holiday){
+
+    let doesCountryHaveItemsAfterDeletionOfdHoliday=null;
+
+    for(let value of  this.refreschedListOfHolidays){
+      if(value.country == tempHoliday.country){
+        doesCountryHaveItemsAfterDeletionOfdHoliday=true;
+        break;
+      }
+      if(value.country != tempHoliday.country){
+        doesCountryHaveItemsAfterDeletionOfdHoliday=false;
+      }
+    }
+
+    if(doesCountryHaveItemsAfterDeletionOfdHoliday==false){
+      this.router.navigate(['/']);
+    }
+    if(doesCountryHaveItemsAfterDeletionOfdHoliday==true){
+      this.router.navigate(['cities/'+tempHoliday.country]);
+    }
   }
 
 }

@@ -12,5 +12,6 @@ public interface HolidayService {
 
     public Holiday getHoliday(int holidayId);
 
+//    public void deleteHoliday(int holidayId);
     public void deleteHoliday(int holidayId);
 }

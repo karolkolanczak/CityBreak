@@ -53,7 +53,8 @@
           </div>
           <div class="row col-sm-4 control-label">
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete holiday</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">Delete holiday</button>
+            <button class="btn btn-danger" (click)="deleteHoliday()"> Delete User</button>
             <br><br>
           </div>
         </div>
@@ -86,7 +87,7 @@
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="modalDelete" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -100,6 +101,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteHoliday()">Delete</button>
+        <!--<button class="btn btn-danger" (click)="deleteHoliday()"> Delete User</button>-->
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
       </div>
     </div>

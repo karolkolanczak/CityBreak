@@ -16,7 +16,7 @@ export class HolidayListComponent implements OnInit {
   imageBlobUrl: any;
   isImageLoading: boolean;
 
-  constructor(private holidayService: HolidayService, private route: ActivatedRoute, private dataStorageService: DataStorageService,private router: Router,) {
+  constructor(private holidayService: HolidayService, private route: ActivatedRoute, private dataStorageService: DataStorageService,private router: Router) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 

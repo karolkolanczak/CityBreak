@@ -8,6 +8,7 @@ import { mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import {EventEmitter, Injectable} from '@angular/core';
 import {Holiday} from './holiday.model';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class HolidayService {
@@ -16,13 +17,15 @@ export class HolidayService {
   citySelected = new EventEmitter<Holiday>();
   countrySelected = new EventEmitter<Holiday>();
   listOfHolidaysChanged= new Subject<Holiday[]>();
+  deletionCompleteOfHoliday=new Subject<Holiday>();
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient,private router:Router){
     this.url = 'http://localhost:8080/api/';
   }
 
   // http://localhost:8080/api/holidays
   getListOfHolidays(): Observable<any>{
+    console.log("Get All Holidays");
     return this.http.get(this.url+'holidays');
   }
 
@@ -32,6 +35,7 @@ export class HolidayService {
   }
 
   getListOfUniqueCountriesForHolidays(listOfHolidays: Holiday[]): Holiday[] {
+    console.log("getListOfUniqueCountriesForHolidays");
     let tempListOfHolidays: Holiday []= [];
     let listOfUniqueCountries: string[] = [...new Set(listOfHolidays.map(value => value.country))];
     for (let uniqueCountry of listOfUniqueCountries) {
@@ -47,6 +51,7 @@ export class HolidayService {
   }
 
   getListOfUniqueCitiesInSelectedCountry(listOfHolidays: Holiday[], country: string){
+    console.log("getListOfUniqueCitiesInSelectedCountry");
     let tempListOfHolidays=[];
     for( let value of listOfHolidays){
         if(value.country===country){
@@ -64,15 +69,21 @@ export class HolidayService {
   }
 
   convertDataFromAPI(data): Holiday[]{
+    console.log("convertDataFromAPI");
     let listOfHolidays: Holiday[]=[];
     for(let value of data){
       let holidayTemp: Holiday={} as Holiday;
-
-      // console.log("IMAGE: ")
+      let base64;
+      let urlImage;
       // console.log( image instanceof Blob)
 
-      let base64 =value.imagePrimitveBytes
-      let urlImage = 'data:image/jpeg;base64,' + base64;
+      if(value.imagePrimitveBytes!=undefined){
+         base64 =value.imagePrimitveBytes
+         urlImage = 'data:image/jpeg;base64,' + base64;
+      }
+      else{
+        urlImage=null;
+      }
 
       holidayTemp=new Holiday(value.id,value.city,value.country,value.capital,value.holidayDetails.id, value.holidayDetails.description,value.holidayDetails.priceForAdult,value.holidayDetails.priceForChild,urlImage)
       listOfHolidays.push(holidayTemp)
@@ -81,7 +92,7 @@ export class HolidayService {
   }
 
   convertDataToAPI(holiday:Holiday){
-    // console.log(holiday);
+    console.log("convertDataToAPI");
 
     // Base64 url of image trimmed one without data:image/png;base64
     // base64="/9j/4AAQSkZJRgABAQE...";
@@ -89,7 +100,6 @@ export class HolidayService {
       let imgURL =holiday.image;
       var base64 = imgURL.split(';base64,').pop();
     }
-
 
     let dataToApi: any;
     dataToApi={
@@ -135,15 +145,20 @@ export class HolidayService {
         })
   }
 
-  deleteHoliday(holidayId){
-    console.log("Delete: "+holidayId) ;
+  deleteHoliday(holiday: Holiday){
+    console.log("Delete: "+holiday.id) ;
 
-    this.http.delete(this.url+'deleteHoliday/'+holidayId)
+    let tempHoliday: Holiday=holiday;
+
+
+    this.http.delete(this.url+'deleteHoliday/'+holiday.id)
       .subscribe(data=>{
         console.log("Delete: response from Database: ");
         console.log(data);
+        this.deletionCompleteOfHoliday.next(tempHoliday);
       },
         error=>{console.log(error.message);
+          this.deletionCompleteOfHoliday.next(tempHoliday);
         })
   }
 
