@@ -19,6 +19,7 @@ export class HolidayService {
   listOfHolidaysChanged= new Subject<Holiday[]>();
   deletionOfHolidayCompleted=new Subject<Holiday>();
   updateOfHolidayCompleted=new Subject<Holiday>();
+  addHolidayCompleted=new Subject<Holiday>();
 
   constructor(private http: HttpClient,private router:Router){
     this.url = 'http://localhost:8080/api/';
@@ -116,6 +117,8 @@ export class HolidayService {
       .subscribe(data=>{
         console.log("Add: response from Database: : ");
         console.log(data);
+        let tempHolidayFromDatabase=this.convertDataFromAPI([data])[0];
+        this.addHolidayCompleted.next(tempHolidayFromDatabase);
       },
       error=>{console.log(error.message);
       })
@@ -127,12 +130,8 @@ export class HolidayService {
 
     this.http.put(this.url+'updateHoliday',tempHoliday)
       .subscribe(data=>{
-        console.log("Update: response from Database: ");
-        console.log(data);
-        let tempHolidayFromDatabase=this.convertDataFromAPI([data])[0]
-        console.log("CONVERTED: ");
-        console.log(tempHolidayFromDatabase);
-          this.updateOfHolidayCompleted.next(tempHolidayFromDatabase);
+        let tempHolidayFromDatabase=this.convertDataFromAPI([data])[0];
+        this.updateOfHolidayCompleted.next(tempHolidayFromDatabase);
       },
       error=>{console.log(error.message);
       })

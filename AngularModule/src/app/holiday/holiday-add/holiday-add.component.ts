@@ -31,6 +31,10 @@ export class HolidayAddComponent implements OnInit {
         this.listOfHolidays=data;
       }
     );
+    this.holidayService.addHolidayCompleted
+      .subscribe((data)=>{
+        this.router.navigate(["cities/"+data.country]);
+      });
   }
 
   addHoliday(){
