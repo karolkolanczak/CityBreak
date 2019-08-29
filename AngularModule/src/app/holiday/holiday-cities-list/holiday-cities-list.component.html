@@ -1,16 +1,17 @@
 <div>
-  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2">
-    <li><a href="#"  style="color:black">Home</a></li>
-    <li><a href="#" style="color:black">1</a></li>
-    <li><a href="#" style="color:black">2</a></li>
-    <li>3</li>
+  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2; margin-bottom: 0px">
+    <li><a [routerLink]="['/']" style="color:black">Home</a></li>
+    <li><a [routerLink]="['/']" style="color:black">List of holidays</a></li>
+    <li>{{selectedCountry}}</li>
   </ol>
-</div><h4>&nbsp;</h4>
+</div><br/>
 
-<h4>List of Cities in {{selectedCountry}}:</h4>
+<h2>List of cities in {{selectedCountry}}:</h2><br/>
 
-<div class="list-group">
-  <app-holiday-cities-item *ngFor="let value of getListOfUniqueCitiesInSelectedCountry()" [holiday]="value" ></app-holiday-cities-item>
+<div class="row container-fluid">
+
+  <div class="list-group">
+    <app-holiday-cities-item *ngFor="let value of getListOfUniqueCitiesInSelectedCountry()" [holiday]="value" ></app-holiday-cities-item>
+  </div>
+
 </div>
-
-<div class="row"></div>

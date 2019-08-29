@@ -1,30 +1,30 @@
 <div>
-  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2">
-    <li><a href="#"  style="color:black">Home</a></li>
-    <li><a href="#" style="color:black">1</a></li>
-    <li><a href="#" style="color:black">2</a></li>
-    <li>3</li>
+  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2; margin-bottom: 0px">
+    <li><a [routerLink]="['/']" style="color:black">Home</a></li>
+    <li>List of holidays</li>
   </ol>
-</div>&nbsp;
+</div><br/>
 
-<h2>List of Holidays:</h2><br/>
+<h2>List of holidays:</h2><br/>
+
 <div class="row container-fluid">
-<div class="list-group">
 
-  <app-holiday-item *ngFor="let value of getListOfUniqueCountriesForHolidays()" [holiday]="value" ></app-holiday-item>
+  <div class="list-group">
 
-  <div *ngFor="let value of listOfHolidays">
-    <div *ngIf="value.city=='Add holiday'">
-      <a class="list-group-item col-md-4" style="cursor: pointer" (click)="redirectToAddHoliday()" >
-        <div class="col-md-12" style="color: black">
-          <div><strong>{{value.country}}</strong></div><br />
-          <img src={{value.image}} width="200" height="200" class="center-block"/>
-        </div>
-      </a>
+    <app-holiday-item *ngFor="let value of getListOfUniqueCountriesForHolidays()" [holiday]="value" ></app-holiday-item>
+
+    <div *ngFor="let value of listOfHolidays">
+      <div *ngIf="value.city=='Add holiday'">
+        <a class="list-group-item col-md-4" style="cursor: pointer" (click)="redirectToAddHoliday()" >
+          <div class="col-md-12" style="color: black">
+            <div><strong>{{value.country}}</strong></div><br />
+            <img src={{value.image}} width="200" height="200" class="center-block"/>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
 
 </div>
 

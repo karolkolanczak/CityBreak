@@ -1,11 +1,12 @@
 <div>
-  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2">
-    <li><a href="#"  style="color:black">Home</a></li>
-    <li><a href="#" style="color:black">1</a></li>
-    <li><a href="#" style="color:black">2</a></li>
-    <li>3</li>
+  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2; margin-bottom: 0px">
+    <li><a [routerLink]="['/']" style="color:black">Home</a></li>
+    <li><a [routerLink]="['/']" style="color:black">List of holidays</a></li>
+    <li><a [routerLink]="['/cities',holiday.country]" style="color:black">{{holiday.country}}</a></li>
+    <li>{{holiday.city}}</li>
   </ol>
-</div>&nbsp;
+</div><br/>
+
 <h2>Holiday details: {{holiday.city}}</h2><br/>
 
 <div class="row container-fluid">
