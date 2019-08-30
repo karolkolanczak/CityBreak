@@ -21,6 +21,7 @@ export class HolidayDetailsEditComponent implements OnInit {
   public notImageMessage: string;
   public exceedSizeLimitMessage: string;
   tempHolidayImage;
+  isLoading=false;
 
   constructor(private holidayService: HolidayService, private route: ActivatedRoute, private router: Router) {
     this.listOfHolidays = this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
@@ -60,9 +61,8 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;
     this.holiday.image=this.imgURL;
-
+    this.isLoading=true;
     this.holidayService.updateHolidayInDatabase(this.holiday)
-
     // this.router.navigate(["holidayDetails/"+this.holidayId]);
     // this.holidayUpdateForm.reset();
   }

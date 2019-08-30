@@ -16,6 +16,7 @@ import {HolidayResolverService} from './holiday/holiday-resolver.service';
 import {HolidayDetailsEditComponent} from './holiday/holiday-details-edit/holiday-details-edit.component';
 import {HolidayAddComponent} from './holiday/holiday-add/holiday-add.component';
 import {HolidayCitiesItemComponent} from './holiday/holiday-cities-list/holiday-cities-item/holiday-cities-item.component';
+import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.component';
 
 
 
@@ -30,7 +31,8 @@ import {HolidayCitiesItemComponent} from './holiday/holiday-cities-list/holiday-
     HolidayCitiesItemComponent,
     HolidayDetailsComponent,
     HolidayDetailsEditComponent,
-    HolidayAddComponent
+    HolidayAddComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

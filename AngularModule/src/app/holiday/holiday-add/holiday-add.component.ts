@@ -15,6 +15,7 @@ export class HolidayAddComponent implements OnInit {
   holiday: Holiday={} as Holiday;
   listOfHolidays: Holiday[]=[];
   listOfUniqueCountriesForHolidays: Holiday[]=[];
+  isLoading=false;
 
   public imagePath;
   imgURL: any;
@@ -44,12 +45,12 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
     this.holiday.image=this.imgURL;
-
+    this.isLoading=true;
     this.holidayService.addHolidayToDatabase(this.holiday);
     // this.listOfHolidays.push(this.holiday)
     // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // this.addHolidayForm.reset();
-    this.router.navigate(["cities/"+this.holiday.country]);
+    // this.router.navigate(["cities/"+this.holiday.country]);
   }
 
   uploadImageFile(event){

@@ -18,6 +18,7 @@ export class HolidayComponent implements OnInit {
   // imageToShow: any;
   // isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
+  isLoading=false;
 
   constructor( private holidayService: HolidayService, private dataStorageService: DataStorageService, private route: ActivatedRoute) {
     this.listOfHolidays=this.route.snapshot.data['holidaysList'];

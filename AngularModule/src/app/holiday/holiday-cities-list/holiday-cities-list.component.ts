@@ -12,6 +12,7 @@ export class HolidayCitiesListComponent implements OnInit {
 
   listOfHolidays: Holiday[]=[];
   selectedCountry: string;
+  isLoading=false;
 
   constructor(private holidayService: HolidayService, private route:ActivatedRoute) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);

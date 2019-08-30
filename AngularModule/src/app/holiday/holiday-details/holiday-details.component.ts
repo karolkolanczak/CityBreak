@@ -15,6 +15,7 @@ export class HolidayDetailsComponent implements OnInit {
   initListOfHolidays: Holiday[]=[];
   refreschedListOfHolidays: Holiday[]=[];
   holidayId: number;
+  isLoading=false;
 
   constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router ) {
     this.initListOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
@@ -52,6 +53,7 @@ export class HolidayDetailsComponent implements OnInit {
   deleteHoliday(){
     console.log("Button: delete");
     // console.log(this.listOfHolidays);
+    this.isLoading=true;
     this.holidayService.deleteHoliday(this.holiday)
   }
 
