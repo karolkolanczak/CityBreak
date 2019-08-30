@@ -60,7 +60,14 @@ export class HolidayDetailsEditComponent implements OnInit {
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;
-    this.holiday.image=this.imgURL;
+
+    if(this.imgURL==undefined){
+      this.holiday.image=this.holiday.image;
+    }
+    else{
+      this.holiday.image=this.imgURL;
+    }
+
     this.isLoading=true;
     this.holidayService.updateHolidayInDatabase(this.holiday)
     // this.router.navigate(["holidayDetails/"+this.holidayId]);
