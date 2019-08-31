@@ -1,8 +1,11 @@
 package com.spring.module.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Address {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

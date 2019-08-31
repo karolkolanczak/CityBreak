@@ -69,12 +69,12 @@ public class HolidayRestContoller {
     }
 
     // convert byte array back to BufferedImage
-    void convertByteArrayToBufferedImage(Byte[] byteImageObject) throws IOException {
-        byte[] bytes = ArrayUtils.toPrimitive(byteImageObject);
-        InputStream in = new ByteArrayInputStream(bytes);
-        BufferedImage bImageFromConvert = ImageIO.read(in);
-        ImageIO.write(bImageFromConvert, "jpg", new File("SpringModule/src/main/resources/1.jpg"));
-    }
+//    void convertByteArrayToBufferedImage(Byte[] byteImageObject) throws IOException {
+//        byte[] bytes = ArrayUtils.toPrimitive(byteImageObject);
+//        InputStream in = new ByteArrayInputStream(bytes);
+//        BufferedImage bImageFromConvert = ImageIO.read(in);
+//        ImageIO.write(bImageFromConvert, "jpg", new File("SpringModule/src/main/resources/1.jpg"));
+//    }
 
     byte[]  convertToByteOnly(Byte[] byteImageObject) throws IOException {
         byte[] bytes = ArrayUtils.toPrimitive(byteImageObject);
