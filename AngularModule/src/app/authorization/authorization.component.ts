@@ -17,7 +17,7 @@ export class AuthorizationComponent implements OnInit {
   user: User=new User(null,null,null,false);
   errorMessage:string;
   isLoading=false;
-  isPassword=false;
+  isPassword=true;
 
   constructor(private authorizationService:AuthorizationService, private router: Router) {
   }
