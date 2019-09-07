@@ -1,0 +1,54 @@
+<div *ngIf="isLoading" style=" width: 100%;height: 100%;position: fixed; top: 0;left: 0;
+  opacity: 0.5;background-color: black;z-index: 1;filter: Alpha(opacity=50);">
+  <div  style=" top: 35%; left: 47% ;position:absolute; width:100%; height:100%">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
+
+<div>
+  <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2; margin-bottom: 0px">
+    <li><a [routerLink]="['/']" style="color:black">Home</a></li>
+    <li>Login form</li>
+  </ol>
+</div><br/>
+
+<h2>Login form</h2><br/>
+
+<div class="row container-fluid" >
+
+  <div class="col-md-6" style='padding-right: 0px;padding-left: 0px;'>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <form class="form-horizontal" (ngSubmit)="checkLoginData()" #loginForm="ngForm" style='text-align: left;'>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Login:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" ngModel="admin" name="login" required #loginInput="ngModel">
+        </div>
+        <div class="col-sm-5 control-label alertInfoClass" id="" *ngIf="!loginInput.valid && loginInput.touched">Please enter login.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Password:</label>
+        <div class=" col-sm-3" >
+          <input type="password" class="form-control" ngModel="admin" name="password" required #passwordInput="ngModel"  [attr.type]="isPassword?'password':'text'">
+        </div>
+        <button style="background-color: Transparent;outline:none;" (mousedown)="showPassword()" (mouseup)="hidePassword()" aria-hidden="true" type="button" class="btn btn-default" aria-label="Left Align">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </button>
+        <div class="col-sm-3 control-label alertInfoClass" id="" *ngIf="!passwordInput.valid && passwordInput.touched">Please enter password.</div>
+      </div>
+
+      <div class="form-group">
+        <div class="row col-sm-3 control-label" style="margin-bottom: 100px; margin-left:100px">
+          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">login</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>

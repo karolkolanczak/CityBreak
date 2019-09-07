@@ -58,7 +58,6 @@ public class DatabaseLoader implements CommandLineRunner {
             }
             holidayService.saveHoliday(value);
         }
-
     }
 
     Byte[]  convertsImage(String imagePath){

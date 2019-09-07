@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class HolidayDAOImpl implements HolidayDAO {
+    public class HolidayDAOImpl implements HolidayDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+        @Autowired
+        private SessionFactory sessionFactory;
 
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
@@ -23,6 +23,8 @@ public class HolidayDAOImpl implements HolidayDAO {
     @Override
     public List<Holiday> getHolidays() {
         Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
+        // alternative
+        // Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
         List <Holiday> listOfHolidays=query.getResultList();
         return listOfHolidays;
     }

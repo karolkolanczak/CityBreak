@@ -55,8 +55,8 @@ export class HolidayDetailsEditComponent implements OnInit {
 
   updateHoliday() {
     console.log("Updated Holiday: ");
-    this.holiday.city = this.updateHolidayForm.value.city;
-    this.holiday.country = this.updateHolidayForm.value.country;
+    this.holiday.city=this.holidayService.convertText(this.updateHolidayForm.value.city)
+    this.holiday.country=this.holidayService.convertText(this.updateHolidayForm.value.country)
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
     this.holiday.priceForChild = this.updateHolidayForm.value.priceForChild;
     this.holiday.description = this.updateHolidayForm.value.description;

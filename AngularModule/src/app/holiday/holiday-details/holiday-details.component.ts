@@ -2,6 +2,8 @@ import {Component, Directive, Input, OnInit, TemplateRef, ViewContainerRef} from
 import {HolidayService} from '../holiday.service';
 import {Holiday} from '../holiday.model';
 import {ActivatedRoute, Params,Router} from '@angular/router';
+import {AuthorizationService} from '../../authorization/authorization.service';
+import {User} from '../../authorization/user.model';
 
 @Component({
   selector: 'app-holiday-details',
@@ -16,8 +18,9 @@ export class HolidayDetailsComponent implements OnInit {
   refreschedListOfHolidays: Holiday[]=[];
   holidayId: number;
   isLoading=false;
+  user: User=new User(null,null,null,false);
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router ) {
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router,private authorizationService:AuthorizationService ) {
     this.initListOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
@@ -42,11 +45,15 @@ export class HolidayDetailsComponent implements OnInit {
           })}
       );
 
+    this.authorizationService.user
+      .subscribe((data)=>{
+        this.user=data;
+      });
 
   }
 
   redirectToEditHoliday(){
-    console.log("Button: Edit\" ");
+    console.log("Button: Edit");
     this.router.navigate(['holidayDetails/'+this.holidayId+'/edit']);
   }
 

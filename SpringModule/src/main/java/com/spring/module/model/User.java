@@ -2,26 +2,21 @@ package com.spring.module.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String login;
     private String password;
+    @Transient
+    private boolean userVerified;
 
     public User() {
-    }
-
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
     }
 
     public int getId() {
@@ -46,5 +41,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isUserVerified() {
+        return userVerified;
+    }
+
+    public void setUserVerified(boolean userVerified) {
+        this.userVerified = userVerified;
     }
 }

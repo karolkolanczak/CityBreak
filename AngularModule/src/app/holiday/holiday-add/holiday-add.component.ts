@@ -3,6 +3,7 @@ import {HolidayService} from '../holiday.service';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Holiday} from '../holiday.model';
+import {AuthorizationService} from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-holiday-add',
@@ -22,7 +23,7 @@ export class HolidayAddComponent implements OnInit {
   public notImageMessage: string;
   public exceedSizeLimitMessage: string;
 
-  constructor(private holidayService: HolidayService,private route: ActivatedRoute, private router:Router) {
+  constructor(private holidayService: HolidayService,private route: ActivatedRoute, private router:Router,private authorizationService:AuthorizationService,) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
 }
@@ -39,8 +40,8 @@ export class HolidayAddComponent implements OnInit {
   }
 
   addHoliday(){
-    this.holiday.city=this.addHolidayForm.value.city;
-    this.holiday.country=this.addHolidayForm.value.country;
+    this.holiday.city=this.holidayService.convertText(this.addHolidayForm.value.city)
+    this.holiday.country=this.holidayService.convertText(this.addHolidayForm.value.country)
     this.holiday.priceForAdult=this.addHolidayForm.value.priceForAdult;
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
@@ -51,6 +52,7 @@ export class HolidayAddComponent implements OnInit {
     // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
     // this.addHolidayForm.reset();
     // this.router.navigate(["cities/"+this.holiday.country]);
+
   }
 
   uploadImageFile(event){

@@ -15,10 +15,15 @@ public class UserRestController {
     @Autowired
     UserService userService;
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public List<User> getListOfUsers(){
         List<User>listOfUsers=userService.getUsers();
         return listOfUsers;
+    }
+
+    @PostMapping("/user")
+    public User verifyUser(@RequestBody User user){
+        return userVerification(user);
     }
 
     @PostMapping("/addUser")
@@ -35,10 +40,27 @@ public class UserRestController {
         return user;
     }
 
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
         return "Spring message: Deleted user with Id: "+userId;
+    }
+
+    public User userVerification (User user){
+
+        User tempUser=new User();
+
+        for(User value: getListOfUsers()){
+            if(value.getLogin().equals(user.getLogin()) && value.getPassword().equals(user.getPassword())){
+                tempUser=value;
+                tempUser.setUserVerified(true);
+                return tempUser;
+            }
+            else{
+                tempUser.setUserVerified(false);
+            }
+        }
+        return tempUser;
     }
 
 }

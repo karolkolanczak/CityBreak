@@ -28,16 +28,23 @@
           <div class="col-sm-5 control-label alertInfoClass" id="" *ngIf="!cityInput.valid && cityInput.touched">Please enter a city.</div>
         </div>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Country:</label>
-          <div class="dropdown col-sm-3">
-            <select class="form-control" [ngModel]="listOfUniqueCountriesForHolidays[0].country" name="country">
-              <option *ngFor="let tempCountry of listOfUniqueCountriesForHolidays" [value]="tempCountry.country">{{tempCountry.country}}</option>
-              <!--<option  >...other</option>-->
-              <!--<textarea class="form-control"  rows="3" ngModel="very nice" name="description" required #descriptionInput="ngModel"></textarea>-->
-            </select>
-          </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Country:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" ngModel="Poland" name="country" required #countryInput="ngModel">
         </div>
+        <div class="col-sm-5 control-label alertInfoClass" *ngIf="!countryInput.valid && countryInput.touched">Please enter a country.</div>
+      </div>
+
+       <!--alternative drop down -->
+        <!--<div class="form-group">-->
+          <!--<label class="col-sm-2 control-label">Country:</label>-->
+          <!--<div class="dropdown col-sm-3">-->
+            <!--<select class="form-control" [ngModel]="listOfUniqueCountriesForHolidays[0].country" name="country">-->
+              <!--<option *ngFor="let tempCountry of listOfUniqueCountriesForHolidays" [value]="tempCountry.country">{{tempCountry.country}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+        <!--</div>-->
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Adult price:</label>

@@ -20,6 +20,7 @@ export class HolidayService {
   deletionOfHolidayCompleted=new Subject<Holiday>();
   updateOfHolidayCompleted=new Subject<Holiday>();
   addHolidayCompleted=new Subject<Holiday>();
+  initHeaderPhoto=new Subject<any>()
 
   constructor(private http: HttpClient,private router:Router){
     this.url = 'http://localhost:8080/api/';
@@ -175,6 +176,13 @@ export class HolidayService {
     return forkJoin(tempListOfResponses);
   }
 
+  convertText(text:string):string{
+    console.log("before text: "+text );
+    let tempText=text.toLowerCase();
+    tempText=tempText.charAt(0).toUpperCase() + tempText.slice(1)
+    console.log("after text: "+tempText );
+    return tempText;
+  }
   // getData(){
   //   return this.http.get(this.url+'holidays')
   //     .pipe(map(initData=>{
