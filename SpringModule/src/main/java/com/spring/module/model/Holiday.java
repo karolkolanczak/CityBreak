@@ -16,7 +16,6 @@ public class Holiday {
     private String city;
     private String country;
     private String capital;
-//    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="holiday_details_id")
     // below 1st part of solution for "JSON infinite recursion" occuring while requesting "api/holidays" through Rest
