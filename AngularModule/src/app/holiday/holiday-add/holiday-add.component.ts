@@ -48,11 +48,6 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.image=this.imgURL;
     this.isLoading=true;
     this.holidayService.addHolidayToDatabase(this.holiday);
-    // this.listOfHolidays.push(this.holiday)
-    // this.holidayService.setListOfAllfHolidays(this.listOfHolidays);
-    // this.addHolidayForm.reset();
-    // this.router.navigate(["cities/"+this.holiday.country]);
-
   }
 
   uploadImageFile(event){
@@ -60,7 +55,6 @@ export class HolidayAddComponent implements OnInit {
     this.exceedSizeLimitMessage=null;
     this.imgURL=null;
     this.addHolidayForm.form.controls['image'].setErrors( null);
-    console.log(event.target.files[0])
     let file=event.target.files[0];
     this.imagePreview(file);
   }

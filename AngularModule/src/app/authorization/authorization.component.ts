@@ -26,7 +26,6 @@ export class AuthorizationComponent implements OnInit {
   }
 
   checkLoginData(){
-    // this.isLoading=true;
     this.errorMessage=null;
 
     if(!this.formToLogin.valid){
@@ -39,17 +38,13 @@ export class AuthorizationComponent implements OnInit {
    this.authorizationService.verifyUser(this.userFromForm)
      .subscribe((data)=>{
        if(data.userVerified==false){
-         // this.isLoading=false;
          this.errorMessage="Login or password is incorrect"
        }
        if(data.userVerified==true){
-         // this.isLoading=false;
          this.router.navigate(['']);
        }
      },
  errorMessage=>{
-       console.log("FROM Authorization: ")
-       console.log(errorMessage)
        this.errorMessage=errorMessage.statusText + " | "+ errorMessage.message;
        }
      );

@@ -53,13 +53,10 @@ export class HolidayDetailsComponent implements OnInit {
   }
 
   redirectToEditHoliday(){
-    console.log("Button: Edit");
     this.router.navigate(['holidayDetails/'+this.holidayId+'/edit']);
   }
 
   deleteHoliday(){
-    console.log("Button: delete");
-    // console.log(this.listOfHolidays);
     this.isLoading=true;
     this.holidayService.deleteHoliday(this.holiday)
   }

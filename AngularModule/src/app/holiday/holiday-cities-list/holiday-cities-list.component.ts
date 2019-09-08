@@ -21,7 +21,6 @@ export class HolidayCitiesListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
         (params: Params)=>{
-          console.log("Param country selected: : "+ params['country']);
           this.selectedCountry=params['country'];
         }
       );

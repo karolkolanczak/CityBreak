@@ -41,8 +41,6 @@ export class HolidayListComponent implements OnInit {
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[]{
-    // console.log("0 Unigue");
-    // console.log(this.listOfHolidays);
     return this.holidayService.getListOfUniqueCountriesForHolidays(this.listOfHolidays);
   }
 

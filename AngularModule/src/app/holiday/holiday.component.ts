@@ -15,8 +15,6 @@ export class HolidayComponent implements OnInit {
 
   selectedCity: Holiday;
   selectedCountry;
-  // imageToShow: any;
-  // isImageLoading: boolean;
   listOfHolidays: Holiday[]=[];
   isLoading=false;
 
@@ -25,11 +23,6 @@ export class HolidayComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this.holidayService.getListOfHolidays()
-    //   .subscribe(data => {
-    //     this.listOfHolidays=this.holidayService.convertDataFromAPI(data);
-    //   });
 
     this.holidayService.citySelected
       .subscribe(
@@ -41,7 +34,6 @@ export class HolidayComponent implements OnInit {
     this.holidayService.countrySelected
       .subscribe((country )=>{
           this.selectedCountry=country;
-          // console.log("Holiday Component: clicked -  "+this.selectedCountry);
         }
       );
   }

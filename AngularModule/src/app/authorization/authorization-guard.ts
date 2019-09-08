@@ -14,16 +14,12 @@ export class AuthorizationGuard implements CanActivate {
     return this.authorizationService.user
       .pipe(map(
         (data)=>{
-          // console.log("Authorization checking");
           if (data.userVerified==true) {
-            console.log("User is authenticated");
             return true;
           }
 
           if(data.userVerified==false){
-            console.log("User is NOT authenticated");
             this.router.navigate(['login']);
-            // this.router.createUrlTree(['/login']);
             return false;
           }
         }

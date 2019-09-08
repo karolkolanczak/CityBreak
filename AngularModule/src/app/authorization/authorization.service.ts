@@ -19,7 +19,6 @@ export class AuthorizationService {
   }
 
   verifyUser(user:User): Observable<any>{
-    // console.log("Inside Service | Login: "+ user.login+" | password: "+user.password)
     return this.http.post(this.url+'user',user)
       .pipe(
         tap((userData)=>{
@@ -33,7 +32,7 @@ export class AuthorizationService {
   logOut(){
     let tempUser: User=new User(null,null,null,false);
     this.user.next(tempUser);
-    // localStorage.clear();
+    // localStorage.clear(); --> alternative
     localStorage.removeItem('userData');
   }
 
@@ -46,8 +45,6 @@ export class AuthorizationService {
     }
 
     let tempUser: User =new User(userData._id,userData._login,userData._password,userData._userVerified);
-    // console.log("LOCALSTORAGE tempUser");
-    // console.log(tempUser);
     this.user.next(tempUser);
   }
 

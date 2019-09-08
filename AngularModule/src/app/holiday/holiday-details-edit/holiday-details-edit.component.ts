@@ -35,8 +35,6 @@ export class HolidayDetailsEditComponent implements OnInit {
           this.holidayId=params['id'];
           this.holiday=this.holidayService.getHolidayById(this.holidayId, this.listOfHolidays);
           this.tempHolidayImage=this.holiday.image;
-          console.log("Edited image");
-          // console.log(this.holiday.image);
         },
         error=>{console.log(error.message)}
       );
@@ -54,7 +52,6 @@ export class HolidayDetailsEditComponent implements OnInit {
   }
 
   updateHoliday() {
-    console.log("Updated Holiday: ");
     this.holiday.city=this.holidayService.convertText(this.updateHolidayForm.value.city)
     this.holiday.country=this.holidayService.convertText(this.updateHolidayForm.value.country)
     this.holiday.priceForAdult = this.updateHolidayForm.value.priceForAdult;
@@ -70,8 +67,6 @@ export class HolidayDetailsEditComponent implements OnInit {
 
     this.isLoading=true;
     this.holidayService.updateHolidayInDatabase(this.holiday)
-    // this.router.navigate(["holidayDetails/"+this.holidayId]);
-    // this.holidayUpdateForm.reset();
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[] {

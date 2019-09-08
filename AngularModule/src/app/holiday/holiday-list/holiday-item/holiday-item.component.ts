@@ -18,7 +18,6 @@ export class HolidayItemComponent implements OnInit {
   }
 
   selectedCountry(){
-    // console.log("Clicked - HolidayItemComponent " +this.holiday);
     this.holidayService.countrySelected.emit(this.holiday)
     this.router.navigate(["cities/"+this.holiday.country]);
   }

@@ -18,8 +18,6 @@ export class HolidayCitiesItemComponent implements OnInit {
   }
 
   selectedCity(){
-    console.log("Selected City " +this.holiday.country+" "+this.holiday.city+" "+this.holiday.priceForAdult);
-    console.log(this.holiday);
     this.holidayService.citySelected.emit(this.holiday)
     this.router.navigate(["holidayDetails/"+this.holiday.id]);
   }

@@ -32,7 +32,6 @@ export class HolidayService {
   }
 
   getImage(holidayId: number): Observable<Blob>{
-    console.log(this.url+'image/'+holidayId);
     return this.http.get(this.url+'image/'+holidayId, { responseType: 'blob' });
   }
 
@@ -68,7 +67,6 @@ export class HolidayService {
       let holidayTemp: Holiday={} as Holiday;
       let base64;
       let urlImage;
-      // console.log( image instanceof Blob)
 
       if(value.imagePrimitveBytes!=undefined){
          base64 =value.imagePrimitveBytes
@@ -116,8 +114,6 @@ export class HolidayService {
 
     this.http.post(this.url+'addHoliday',tempHoliday)
       .subscribe(data=>{
-        console.log("Add: response from Database: : ");
-        console.log(data);
         let tempHolidayFromDatabase=this.convertDataFromAPI([data])[0];
         this.addHolidayCompleted.next(tempHolidayFromDatabase);
       },
@@ -144,8 +140,6 @@ export class HolidayService {
 
     this.http.delete(this.url+'deleteHoliday/'+holiday.id)
       .subscribe(data=>{
-        console.log("Delete: response from Database: ");
-        console.log(data);
         this.deletionOfHolidayCompleted.next(tempHoliday);
       },
       error=>{console.log(error.message);
@@ -163,39 +157,10 @@ export class HolidayService {
     return holidayTemp;
   }
 
-  public requestDataFromMultipleSources(listOfHolidays:Holiday[]): Observable<any[]> {
-    let tempListOfResponses = [];
-    for( let value of listOfHolidays){
-      tempListOfResponses.push(this.http.get(this.url+'image/'+value.id, { responseType: 'blob' }));
-    }
-    // let response1 =  this.http.get(this.url+'image/'+holidayId, { responseType: 'blob' });
-    // let response2 = this.http.get(requestUrl2);
-    // let response3 = this.http.get(requestUrl3);
-    // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
-    // return forkJoin([response1, response2, response3]);
-    return forkJoin(tempListOfResponses);
-  }
-
   convertText(text:string):string{
-    console.log("before text: "+text );
     let tempText=text.toLowerCase();
     tempText=tempText.charAt(0).toUpperCase() + tempText.slice(1)
-    console.log("after text: "+tempText );
     return tempText;
   }
-  // getData(){
-  //   return this.http.get(this.url+'holidays')
-  //     .pipe(map(initData=>{
-  //
-  //       for(let value of initData){
-  //         console.log(value.image)
-  //         .pipe(map(value.image))
-  //       }
-  //         return initData;
-  //       }))
-  //     .subscribe(data=>{
-  //       console.log(data);
-  //     })
-  // }
 
 }
