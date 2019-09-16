@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HolidayService} from '../holiday.service';
 import {Holiday} from '../holiday.model';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'app-holiday-cities-list',
@@ -12,10 +13,10 @@ export class HolidayCitiesListComponent implements OnInit {
 
   listOfHolidays: Holiday[]=[];
   selectedCountry: string;
-  isLoading=false;
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute) {
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute, private router: Router,private headerService:HeaderService) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
+    this.headerService.isLoading.next(false);
   }
 
   ngOnInit() {
@@ -30,5 +31,9 @@ export class HolidayCitiesListComponent implements OnInit {
       return this.holidayService.getListOfUniqueCitiesInSelectedCountry(this.listOfHolidays,this.selectedCountry);
   }
 
+  redirectToHomePage(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate([""]);
+  }
 
 }

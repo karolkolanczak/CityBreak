@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Holiday} from '../holiday.model';
 import {AuthorizationService} from '../../authorization/authorization.service';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'app-holiday-add',
@@ -16,16 +17,15 @@ export class HolidayAddComponent implements OnInit {
   holiday: Holiday={} as Holiday;
   listOfHolidays: Holiday[]=[];
   listOfUniqueCountriesForHolidays: Holiday[]=[];
-  isLoading=false;
-
   public imagePath;
   imgURL: any;
   public notImageMessage: string;
   public exceedSizeLimitMessage: string;
 
-  constructor(private holidayService: HolidayService,private route: ActivatedRoute, private router:Router,private authorizationService:AuthorizationService,) {
+  constructor(private holidayService: HolidayService,private route: ActivatedRoute, private router:Router,private authorizationService:AuthorizationService,private headerService:HeaderService) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays=this.getListOfUniqueCountriesForHolidays();
+    this.headerService.isLoading.next(false);
 }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class HolidayAddComponent implements OnInit {
     this.holiday.priceForChild=this.addHolidayForm.value.priceForChild;
     this.holiday.description=this.addHolidayForm.value.description;
     this.holiday.image=this.imgURL;
-    this.isLoading=true;
+    this.headerService.isLoading.next(true);
     this.holidayService.addHolidayToDatabase(this.holiday);
   }
 

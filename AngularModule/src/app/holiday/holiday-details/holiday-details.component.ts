@@ -4,6 +4,7 @@ import {Holiday} from '../holiday.model';
 import {ActivatedRoute, Params,Router} from '@angular/router';
 import {AuthorizationService} from '../../authorization/authorization.service';
 import {User} from '../../authorization/user.model';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'app-holiday-details',
@@ -17,11 +18,11 @@ export class HolidayDetailsComponent implements OnInit {
   initListOfHolidays: Holiday[]=[];
   refreschedListOfHolidays: Holiday[]=[];
   holidayId: number;
-  isLoading=false;
   user: User=new User(null,null,null,false);
 
-  constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router,private authorizationService:AuthorizationService ) {
+  constructor(private holidayService: HolidayService, private route:ActivatedRoute,private router: Router,private authorizationService:AuthorizationService,private headerService:HeaderService ) {
     this.initListOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
+    this.headerService.isLoading.next(false);
   }
 
   ngOnInit() {
@@ -52,12 +53,8 @@ export class HolidayDetailsComponent implements OnInit {
 
   }
 
-  redirectToEditHoliday(){
-    this.router.navigate(['holidayDetails/'+this.holidayId+'/edit']);
-  }
-
   deleteHoliday(){
-    this.isLoading=true;
+    this.headerService.isLoading.next(true);
     this.holidayService.deleteHoliday(this.holiday)
   }
 
@@ -83,4 +80,18 @@ export class HolidayDetailsComponent implements OnInit {
     }
   }
 
+  redirectToEditHoliday(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate(['holidayDetails/'+this.holidayId+'/edit']);
+  }
+
+  redirectToHomePage(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate([""]);
+  }
+
+  redirectToSelectedCountry(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate(["cities/"+this.holiday.country]);
+  }
 }

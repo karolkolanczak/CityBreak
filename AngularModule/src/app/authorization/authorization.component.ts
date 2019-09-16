@@ -4,6 +4,7 @@ import {User} from './user.model';
 import {AuthorizationService} from './authorization.service';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import {HeaderService} from '../holiday/header/header.service';
 
 @Component({
   selector: 'app-authorization',
@@ -16,10 +17,9 @@ export class AuthorizationComponent implements OnInit {
   userFromForm: User={} as User;
   user: User=new User(null,null,null,false);
   errorMessage:string;
-  isLoading=false;
   isPassword=true;
 
-  constructor(private authorizationService:AuthorizationService, private router: Router) {
+  constructor(private authorizationService:AuthorizationService, private router: Router, private headerService: HeaderService) {
   }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class AuthorizationComponent implements OnInit {
 
   checkLoginData(){
     this.errorMessage=null;
-
+    this.headerService.isLoading.next(true);
     if(!this.formToLogin.valid){
       return;
     }

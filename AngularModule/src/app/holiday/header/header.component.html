@@ -1,3 +1,10 @@
+<div *ngIf="isLoading" style=" width: 100%;height: 100%;position: fixed; top: 0;left: 0;
+  opacity: 0.5;background-color: black;z-index: 1;filter: Alpha(opacity=50);">
+  <div  style=" top: 35%; left: 47% ;position:absolute; width:100%; height:100%">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
+
 <nav class="navbar navbar-default" style="margin-bottom: 0px; background-color: #F2F2F2; opacity: 1;
 background-image: url('assets/img/header.jpg');;
 background-position: center;
@@ -13,13 +20,13 @@ position: relative;
       <!--<div style="background-color:#F2F2F2;position:absolute; top:10px; left:10px;width:182px;height:80px;opacity: 0.6;"></div>-->
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="navbar-brand" [ngStyle]="{'color': 'black', 'text-decoration': 'none'}" [routerLink]="['/']">
+          <a class="navbar-brand" [ngStyle]="{'color': 'black', 'text-decoration': 'none','cursor': 'pointer'}" (click)="redirectToHomePage()">
             <h2 style="color:white"> City Break</h2>
           </a>
         </li>
         <h5>&nbsp;</h5>
         <li class="nav-item">
-          <a class="navbar-brand" [ngStyle]="{'color': 'black', 'text-decoration': 'none'}" [routerLink]="['/']" ><h5 style="font-weight: bold;color:white"> Information Turistic Portal</h5></a>
+          <a class="navbar-brand" [ngStyle]="{'color': 'black', 'text-decoration': 'none','cursor': 'pointer'}" (click)="redirectToHomePage()" ><h5 style="font-weight: bold;color:white"> Information Turistic Portal</h5></a>
         </li>
         <li *ngIf="!user.userVerified" class="nav-item" style="position:absolute; top:5px; right:10px">
             <button type="submit" class="btn btn-primary" (click)="redirectToLoginPage()">Admin area</button>
@@ -27,8 +34,8 @@ position: relative;
         <li *ngIf="user.userVerified" class="nav-item" style="position:absolute; top:5px; right:10px">
           <button type="submit" class="btn btn-primary" (click)="logout()">Logout</button>
         </li>
-        <li *ngIf="user.userVerified" class="nav-item" style="position:absolute; top:45px; right:20px">
-          <span style="color:white">Welcome '<strong>{{user.login}}</strong>'</span>
+        <li *ngIf="user.userVerified" class="nav-item" style="position:absolute; top:40px; right:10px">
+          <span style="color:white"><strong>Welcome '{{user.login}}</strong>'</span>
         </li>
       </ul>
     </div>

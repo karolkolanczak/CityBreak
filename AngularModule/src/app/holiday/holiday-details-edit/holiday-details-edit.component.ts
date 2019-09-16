@@ -3,6 +3,7 @@ import {HolidayService} from '../holiday.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Holiday} from '../holiday.model';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'app-holiday-details-edit',
@@ -21,11 +22,11 @@ export class HolidayDetailsEditComponent implements OnInit {
   public notImageMessage: string;
   public exceedSizeLimitMessage: string;
   tempHolidayImage;
-  isLoading=false;
 
-  constructor(private holidayService: HolidayService, private route: ActivatedRoute, private router: Router) {
+  constructor(private holidayService: HolidayService, private route: ActivatedRoute, private router: Router,private headerService:HeaderService) {
     this.listOfHolidays = this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
     this.listOfUniqueCountriesForHolidays = this.getListOfUniqueCountriesForHolidays();
+    this.headerService.isLoading.next(false);
   }
 
   ngOnInit() {
@@ -65,12 +66,27 @@ export class HolidayDetailsEditComponent implements OnInit {
       this.holiday.image=this.imgURL;
     }
 
-    this.isLoading=true;
+    this.headerService.isLoading.next(true);
     this.holidayService.updateHolidayInDatabase(this.holiday)
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[] {
     return this.holidayService.getListOfUniqueCountriesForHolidays(this.listOfHolidays);
+  }
+
+  redirectToHomePage(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate([""]);
+  }
+
+  redirectToSelectedCountry(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate(["cities/"+this.holiday.country]);
+  }
+
+  redirectToSelectedCity(){
+    this.headerService.isLoading.next(true);
+    this.router.navigate(["holidayDetails/"+this.holiday.id]);
   }
 
   uploadImageFile(event){

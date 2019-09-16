@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Holiday} from '../holiday.model';
 import {HolidayService} from '../holiday.service';
-import {DataStorageService} from '../../shared/data-storage.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {User} from '../../authorization/user.model';
 import {AuthorizationService} from '../../authorization/authorization.service';
+import {HeaderService} from '../header/header.service';
 
 
 @Component({
@@ -15,11 +15,9 @@ import {AuthorizationService} from '../../authorization/authorization.service';
 export class HolidayListComponent implements OnInit {
 
   listOfHolidays: Holiday[]=[];
-  imageBlobUrl: any;
-  isImageLoading: boolean;
   user:User;
 
-  constructor(private authorizationService:AuthorizationService,private holidayService: HolidayService, private route: ActivatedRoute, private dataStorageService: DataStorageService,private router: Router) {
+  constructor(private authorizationService:AuthorizationService,private holidayService: HolidayService, private route: ActivatedRoute,private router: Router,private headerService:HeaderService) {
     this.listOfHolidays= this.holidayService.convertDataFromAPI(this.route.snapshot.data['holidaysList']);
   }
 
@@ -38,6 +36,10 @@ export class HolidayListComponent implements OnInit {
         }
       );
 
+    this.route.data.subscribe((data) => {
+      // when init data uploads spinner can be turned off
+      this.headerService.isLoading.next(false);
+    })
   }
 
   getListOfUniqueCountriesForHolidays(): Holiday[]{
@@ -45,6 +47,7 @@ export class HolidayListComponent implements OnInit {
   }
 
   redirectToAddHoliday(){
+    this.headerService.isLoading.next(true);
     this.router.navigate(['/holiday/add']);
   }
 

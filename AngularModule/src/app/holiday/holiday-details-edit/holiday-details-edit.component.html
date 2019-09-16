@@ -1,20 +1,12 @@
-<div *ngIf="isLoading" style=" width: 100%;height: 100%;position: fixed; top: 0;left: 0;
-  opacity: 0.5;background-color: black;z-index: 1;filter: Alpha(opacity=50);">
-  <div  style=" top: 35%; left: 47% ;position:absolute; width:100%; height:100%">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-</div>
-
 <div>
   <ol class="breadcrumb container" style="width: 100%; background-color: #F2F2F2; margin-bottom: 0px">
-    <li><a [routerLink]="['/']" style="color:black">Home</a></li>
-    <li><a [routerLink]="['/']" style="color:black">List of holidays</a></li>
-    <li><a [routerLink]="['/cities',holiday.country]" style="color:black">{{holiday.country}}</a></li>
-    <li><a [routerLink]="['/holidayDetails',holiday.id]" style="color:black">{{holiday.city}}</a></li>
+    <li><a (click)="redirectToHomePage()" style="color:black;cursor: pointer">Home</a></li>
+    <li><a (click)="redirectToHomePage()" style="color:black;cursor: pointer">List of holidays</a></li>
+    <li><a (click)="redirectToSelectedCountry()" style="color:black;cursor: pointer">{{holiday.country}}</a></li>
+    <li><a (click)="redirectToSelectedCity()" style="color:black;cursor: pointer">{{holiday.city}}</a></li>
     <li>edit</li>
   </ol>
 </div><br/>
-
 <h2>Edit Holiday: {{holiday.city}}</h2><br/>
 
 <div class="row container-fluid">
