@@ -15,8 +15,13 @@ export class AuthorizationService {
   user=new BehaviorSubject<User>(this.initDataUser);
 
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:8080/api/';
+    // ------------- DEV---------------------
+    // this.url = 'http://localhost:8080/api/';
+    // ------------- PROD ---------------------
+    // this.url = 'http://spring-env.npype3t9cv.us-east-1.elasticbeanstalk.com/api/';
+    this.url = '/api/';
   }
+
 
   verifyUser(user:User): Observable<any>{
     return this.http.post(this.url+'user',user)
