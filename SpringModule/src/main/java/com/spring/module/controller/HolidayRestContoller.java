@@ -12,7 +12,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://citybreakinformation.herokuapp.com",
+        "https://spring-citybreak.herokuapp.com",
+        "http://spring-env.npype3t9cv.us-east-1.elasticbeanstalk.com"}, maxAge = 3600)
+//@CrossOrigin(origins = "https://citybreakinformation.herokuapp.com", maxAge = 3600)
+
 public class HolidayRestContoller {
 
     @Autowired

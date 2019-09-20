@@ -57,7 +57,9 @@ public class HibernateConfiguration {
             properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
             properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
             properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-
+            // postgresql
+            properties.put("spring.datasource.hikari.connectionTimeout", environment.getRequiredProperty("spring.datasource.hikari.connectionTimeout"));
+            properties.put("spring.datasource.hikari.maximumPoolSize", environment.getRequiredProperty("spring.datasource.hikari.maximumPoolSize"));
             return properties;
         }
 

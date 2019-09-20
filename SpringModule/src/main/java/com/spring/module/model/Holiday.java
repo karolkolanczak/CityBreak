@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Table(name="holiday")
 public class Holiday {
 
     @Id

@@ -7,10 +7,12 @@ import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Table(name="holiday_details")
 public class HolidayDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length=500)
     private String description;
     private double priceForAdult;
     private double priceForChild;

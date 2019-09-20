@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,7 +21,11 @@ import java.util.List;
 
     @Override
     public List<Holiday> getHolidays() {
-        Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
+        // MYSQL
+//        Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
+        // POSTGRES
+        Query<Holiday> query=getSession().createSQLQuery("Select * FROM holiday").addEntity(Holiday.class);
+
         // alternative
         // Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
         List <Holiday> listOfHolidays=query.getResultList();

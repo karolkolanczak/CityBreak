@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+//in postgres 'user' is restricted
+@Table(name="holiday_user")
 public class User {
 
     @Id
