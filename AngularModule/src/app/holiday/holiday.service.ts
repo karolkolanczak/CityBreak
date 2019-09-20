@@ -23,7 +23,10 @@ export class HolidayService {
   initHeaderPhoto=new Subject<any>()
 
   constructor(private http: HttpClient,private router:Router){
-    this.url = 'http://localhost:8080/api/';
+     // ------------- DEV---------------------
+    // this.url = 'http://localhost:8080/api/';
+    // ------------- PROD ---------------------
+    this.url = 'http://spring-env.npype3t9cv.us-east-1.elasticbeanstalk.com/api/';
   }
 
   // http://localhost:8080/api/holidays
@@ -120,7 +123,7 @@ export class HolidayService {
       error=>{console.log(error.message);
       })
   }
-
+  // addHolidayCompleted=new Subject<Holiday>();
   updateHolidayInDatabase(holiday:Holiday){
 
     let tempHoliday=this.convertDataToAPI(holiday);

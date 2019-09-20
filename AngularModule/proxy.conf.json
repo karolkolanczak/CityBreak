@@ -1,0 +1,6 @@
+{
+  "/api/*": {
+    "target": "https://spring-citybreak.herokuapp.com",
+    "secure": "false"
+  }
+}
