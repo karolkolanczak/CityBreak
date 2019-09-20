@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name="address")
 public class Address {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

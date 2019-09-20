@@ -3,6 +3,7 @@ package com.spring.module.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name="customer")
 public class Customer {
 
     @Id

@@ -7,13 +7,13 @@ const app = express();
 app.use(express.static(__dirname + '/dist/AngularModule'));
 
 // cross origin problem is now solved by 'proxy.conf.json'
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'accept, authorization, content-type, x-requested-with');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   res.setHeader('Access-Control-Allow-Origin', req.header('origin'));
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'accept, authorization, content-type, x-requested-with');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Origin', req.header('origin'));
+  next();
+});
 
 app.get('/*all', function(req,res) {
 
