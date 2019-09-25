@@ -22,9 +22,11 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> getUsers() {
         // MYSQL
-        // Query<User> query=getSession().createSQLQuery("Select * FROM User").addEntity(User.class);
+//         Query<User> query=getSession().createSQLQuery("Select * FROM User").addEntity(User.class);
+
         // POSTGRES
-        Query<User> query=getSession().createSQLQuery("Select * FROM holiday_user").addEntity(User.class);
+          Query<User> query=getSession().createSQLQuery("Select * FROM holiday_user").addEntity(User.class);
+
         // alternative
         // Query<User> query =getSession().createQuery("from User",User.class);
         List<User>listOfUsers=query.getResultList();

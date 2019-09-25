@@ -22,9 +22,10 @@ import java.util.List;
     @Override
     public List<Holiday> getHolidays() {
         // MYSQL
-//        Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
+//           Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);
+
         // POSTGRES
-        Query<Holiday> query=getSession().createSQLQuery("Select * FROM holiday").addEntity(Holiday.class);
+          Query<Holiday> query=getSession().createSQLQuery("Select * FROM holiday").addEntity(Holiday.class);
 
         // alternative
         // Query<Holiday> query =getSession().createQuery("from Holiday",Holiday.class);

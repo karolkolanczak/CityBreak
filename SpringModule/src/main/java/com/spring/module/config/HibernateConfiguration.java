@@ -24,8 +24,8 @@ import java.util.Properties;
 @ComponentScan({ "com.spring.module.config" })
 @PropertySource(value = { "classpath:application.properties" })
 // below due to query in DAO and exception
-//java.lang.ClassCastException: class org.springframework.orm.jpa.EntityManagerHolder cannot be cast to class org.springframework.orm.hibernate5.SessionHolder
-//https://stackoverflow.com/questions/38627491/spring-4-hibernate-5-org-springframework-orm-jpa-entitymanagerholder-cannot
+// java.lang.ClassCastException: class org.springframework.orm.jpa.EntityManagerHolder cannot be cast to class org.springframework.orm.hibernate5.SessionHolder
+// https://stackoverflow.com/questions/38627491/spring-4-hibernate-5-org-springframework-orm-jpa-entitymanagerholder-cannot
 @EnableAutoConfiguration(exclude=HibernateJpaAutoConfiguration.class)
 public class HibernateConfiguration {
 
@@ -57,7 +57,7 @@ public class HibernateConfiguration {
             properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
             properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
             properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-            // postgresql
+            // postgresql only below - > comment when used Mysql or dev
             properties.put("spring.datasource.hikari.connectionTimeout", environment.getRequiredProperty("spring.datasource.hikari.connectionTimeout"));
             properties.put("spring.datasource.hikari.maximumPoolSize", environment.getRequiredProperty("spring.datasource.hikari.maximumPoolSize"));
             return properties;
